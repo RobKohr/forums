@@ -1,0 +1,22 @@
+- [ ] Register a user
+- [ ] login a user
+- [ ] Create a forum
+- [ ] Set user who created forum as admin
+- [ ] create a post in a forum
+- [ ] create a comment on a post
+- [ ] create a reply on a comment
+- [ ] upvote a post
+- [ ] downvote a post
+- [ ] see all posts in a forum
+- [ ] see posts across all forums
+- [ ] logout a user
+- [ ] Post to user feed
+- [ ] Create RSS feed
+- [ ] Import an RSS feed
+- [ ] Subscribe to an RSS feed that has already been imported
+- [ ] Comment on a post in a feed
+- [ ] Create a user profile
+- [ ] When you create a post, user is asked to identify 5 posts as spam/not spam/other
+- [ ] When you create a comment, user is asked to identify 5 comments as spam/not spam/other
+- [ ] When you create a forum, user is asked to identify 5 posts as spam/not spam/other
+- [ ] Sort list by New, Hot, Top, Controversial
