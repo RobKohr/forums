@@ -1,0 +1,55 @@
+:root {
+  --FunGreen: rgb(1, 102, 71);
+  --WineBerry: rgb(63, 17, 53);
+  --CongressBlue: rgb(0, 67, 145);
+  --EasternBlue: rgb(34, 131, 173)
+  --Tabasco: rgb(163, 29, 18);
+  --Grenadier: rgb(203, 66, 3);
+  --SwampBlack: rgb(0, 1, 1);
+  --GrayNickel: #c9c9c7;
+  --PirateGold : rgb(169, 116, 2);
+}
+
+body {
+  margin: 0;
+  padding: 0px;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#app {
+  #header {
+    background-color: #282c34;
+    display: flex;
+    height: 50px;
+    nav {
+      a {
+        text-decoration: none;
+      }
+      ul {
+        margin: 0px;
+        padding-top: 1em;
+        li {
+          display: inline;
+          margin: 0 1em;
+        }
+      }
+    }
+  }
+  #content {
+    min-height: 75vh;
+  }
+  #footer {
+    text-align: center;
+    width: 100%;
+    font-size: 0.4em;
+    padding: 0.3em;
+  }
+}
