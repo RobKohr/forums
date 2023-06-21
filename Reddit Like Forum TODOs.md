@@ -1,5 +1,9 @@
 - [ ] Register a user
+  - [ ] https://medium.com/patrik-bego/database-schema-migrations-with-nodejs-de9d9090b177
+  - [ ] using knex as a query builder
+  - [ ] Node run ts
 - [ ] login a user
+- [ ] Send an email to verify user
 - [ ] Create a forum
 - [ ] Set user who created forum as admin
 - [ ] create a post in a forum

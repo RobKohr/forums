@@ -47,6 +47,7 @@ const App: Component = () => {
         <div id="neverall-forums-logo">Logo</div>
         <div id="search-area">
           <input type="text" id="search" placeholder="Search" />
+          {import.meta.env["VITE_VARIABLE_NAME"]}
           <input type="submit" id="search-button" value="Search" />
         </div>
         <div id="account-controls">
