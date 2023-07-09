@@ -3,7 +3,8 @@ import _ from "lodash";
 import { Component, For } from "solid-js";
 import Home from "./routes";
 import About from "./routes/About";
-import { SignIn } from "./routes/accounts/SignIn";
+import Register from "./routes/register";
+import SignIn from "./routes/sign-in";
 export interface Route {
   path: string;
   component: Component;
@@ -18,6 +19,7 @@ const routes: Route[] = [
   { path: "/", component: Home },
   { path: "/about", component: About },
   { path: "/sign-in", component: SignIn },
+  { path: "/sign-up", component: Register },
 ];
 
 routes.forEach((route) => {
@@ -34,7 +36,7 @@ function urlEncode(str: string) {
 function NotFound() {
   return <div>Page Not Found</div>;
 }
-
+const VITE_VARIABLE_NAME = import.meta.env["VITE_VARIABLE_NAME"];
 const App: Component = () => {
   function signIn() {
     console.log("sign in");
@@ -47,7 +49,7 @@ const App: Component = () => {
         <div id="neverall-forums-logo">Logo</div>
         <div id="search-area">
           <input type="text" id="search" placeholder="Search" />
-          {import.meta.env["VITE_VARIABLE_NAME"]}
+          {VITE_VARIABLE_NAME}
           <input type="submit" id="search-button" value="Search" />
         </div>
         <div id="account-controls">

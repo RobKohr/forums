@@ -1,7 +1,9 @@
+Allow designs like https://old.reddit.com/r/gameofthrones/
+Some data seeding: https://urlroulette.net/
 - [ ] Register a user
+  - [x] Gave up on using typescript on the server side ... meh
   - [ ] https://medium.com/patrik-bego/database-schema-migrations-with-nodejs-de9d9090b177
   - [ ] using knex as a query builder
-  - [ ] Node run ts
 - [ ] login a user
 - [ ] Send an email to verify user
 - [ ] Create a forum
@@ -24,3 +26,5 @@
 - [ ] When you create a comment, user is asked to identify 5 comments as spam/not spam/other
 - [ ] When you create a forum, user is asked to identify 5 posts as spam/not spam/other
 - [ ] Sort list by New, Hot, Top, Controversial
+
+Send a message to this guy: https://medium.com/@sobeyharker/52-alternatives-to-reddit-1a9dcf5e0658

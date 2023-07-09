@@ -1,0 +1,89 @@
+{
+  "info": {
+    "title": "Tspec API",
+    "version": "0.0.1"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/books/{id}": {
+      "get": {
+        "operationId": "BookApiSpec_get_/books/{id}",
+        "tags": [
+          "Book"
+        ],
+        "summary": "Get book by idasdf",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Field description defined by JSDoc",
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title"
+        ]
+      },
+      "qs.ParsedQs": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "#/components/schemas/qs.ParsedQs"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/qs.ParsedQs"
+              }
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

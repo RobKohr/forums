@@ -14,6 +14,8 @@
     "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true,
+    "sourceMap": true,
+    "outDir": "dist"
   },
   "ts-node": {
     // Tell ts-node CLI to install the --loader automatically
