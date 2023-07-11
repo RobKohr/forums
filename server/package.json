@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx tspec generate --outputPath openapi.json; npx nodemon",
+    "start": "npx tspec generate --outputPath openapi.json; npx nodemon --trace-warnings",
     "build": "rimraf ./build && tsc",
     "start:prod": "npm run build && node build/index.js"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.4.1",
+    "@types/validatorjs": "^3.15.0",
     "nodemon": "^2.0.22",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
@@ -25,6 +26,7 @@
     "postgres": "^3.3.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "tspec": "^0.1.103"
+    "tspec": "^0.1.103",
+    "validatorjs": "^3.22.1"
   }
 }

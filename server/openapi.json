@@ -5,6 +5,57 @@
   },
   "openapi": "3.0.3",
   "paths": {
+    "/auth/register": {
+      "post": {
+        "operationId": "RegisterApiSpec_post_/auth/register",
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register a user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "retypePassword": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "email",
+                  "password",
+                  "retypePassword",
+                  "username"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/books/{id}": {
       "get": {
         "operationId": "BookApiSpec_get_/books/{id}",
@@ -39,25 +90,11 @@
   },
   "components": {
     "schemas": {
-      "Book": {
+      "ParamsDictionary": {
         "type": "object",
-        "properties": {
-          "id": {
-            "description": "Field description defined by JSDoc",
-            "type": "number"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "title"
-        ]
+        "additionalProperties": {
+          "type": "string"
+        }
       },
       "qs.ParsedQs": {
         "type": "object",
@@ -83,6 +120,26 @@
             }
           ]
         }
+      },
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Field description defined by JSDoc",
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title"
+        ]
       }
     }
   }
