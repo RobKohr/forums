@@ -1,3 +1,5 @@
+/* Copyright Robert Kohr 2023 - All Rights Reserved */
+
 import "dotenv/config";
 import { NextFunction, Request, Response } from "express";
 import { TspecDocsMiddleware } from "tspec";
@@ -22,6 +24,12 @@ const express = require("express"),
   swaggerUi = require("swagger-ui-express");
 const app = express();
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
 const port = process.env["API_PORT"] || 9999;
 
 const initServer = async () => {
@@ -35,6 +43,7 @@ const initServer = async () => {
   });
 
   app.use("/books", require("./routes/books").router);
+  app.use("/auth", require("./routes/auth").router);
   app.listen(port);
 
   global.log(`Startup complete: http://localhost:${port}/docs`);

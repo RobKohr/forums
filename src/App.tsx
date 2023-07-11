@@ -1,3 +1,5 @@
+/* Copyright Robert Kohr 2023 - All Rights Reserved */
+
 import { A, Route, Routes } from "@solidjs/router";
 import _ from "lodash";
 import { Component, For } from "solid-js";
