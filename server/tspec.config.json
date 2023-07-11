@@ -1,0 +1,12 @@
+{
+  "specPathGlobs": ["routes/**/**/*.ts"],
+  "tsconfigPath": "./tsconfig.json",
+  "outputPath": "./openapi.json",
+  "specVersion": 3,
+  "openapi": {
+    "title": "Tspec API",
+    "version": "0.0.1"
+  },
+  "debug": false,
+  "ignoreErrors": true
+}

@@ -32,6 +32,7 @@ app.use(bodyParser.json());
 
 const port = process.env["API_PORT"] || 9999;
 
+import { router as authRouter } from "./routes/auth.api";
 const initServer = async () => {
   const app = express();
   /* output every api request's path and method to the console, if that file isn't a static file*/
@@ -42,8 +43,7 @@ const initServer = async () => {
     next();
   });
 
-  app.use("/books", require("./routes/books").router);
-  app.use("/auth", require("./routes/auth").router);
+  app.use("/auth", authRouter);
   app.listen(port);
 
   global.log(`Startup complete: http://localhost:${port}/docs`);

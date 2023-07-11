@@ -39,6 +39,7 @@
     "sass": "^1.62.1",
     "solid-forms": "^0.4.8",
     "solid-js": "^1.6.10",
+    "tspec": "^0.1.103",
     "validatorjs": "^3.22.1",
     "vite-plugin-svg-inject": "^1.0.10"
   }

@@ -1,7 +1,7 @@
 import { createFormControl, createFormGroup } from "solid-forms";
 import { createEffect } from "solid-js";
-import { TextInput } from "../components/forms/TextInput";
-import { required } from "../validators";
+import { TextInput } from "../../components/forms/TextInput";
+import { required } from "../../validators";
 
 export default function SignIn() {
   const group = createFormGroup({

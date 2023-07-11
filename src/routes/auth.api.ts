@@ -4,8 +4,8 @@ import { Request, Response, Router } from "express";
 import fs from "fs";
 import { Tspec } from "tspec";
 import Validator from "validatorjs";
-import { knex, prettyError } from "../db";
-import { createValidator } from "../validation/common";
+import { knex, prettyError } from "../common/db";
+import { createValidator } from "../common/validation";
 
 export const router = Router();
 // parse application/x-www-form-urlencoded
@@ -59,24 +59,8 @@ Validator.register(
   "Your password is almost strong enough. You can add more characters, numbers, and symbols to make it stronger."
 );
 
-/* import ./10-million-password-list-top-1000000.txt, convert to lower case, and if it is strong enough, add to strong common passwords */
-/*
-function filterBigPasswordList() {
-  const bigPasswordList = fs.readFileSync(__dirname + "/10-million-password-list-top-1000000.txt", "utf8").split("\n");
-  let count = 0;
-  fs.writeFileSync(__dirname + "/strong-common-passwords.txt", "");
-  bigPasswordList.forEach((password) => {
-    password = password.trim().toLocaleLowerCase();
-    if (passwordStrength(password) < 1e13) return;
-    fs.appendFileSync(__dirname + "/strong-common-passwords.txt", password + "\n");
-    count++;
-  });
-  console.log("count", count);
-}
-filterBigPasswordList();
-*/
 const passwordListHashTable: { [password: string]: boolean } = {};
-const strongCommonPasswords = fs.readFileSync(__dirname + "/strong-common-passwords.txt", "utf8").split("\n");
+const strongCommonPasswords = fs.readFileSync(__dirname + "/../common/strong-common-passwords.txt", "utf8").split("\n");
 strongCommonPasswords.forEach((password) => {
   passwordListHashTable[password] = true;
 });
@@ -145,6 +129,9 @@ const register = async (req: Request, res: Response) => {
 };
 
 router.post("/register", createValidator(rules, Validator), register);
+router.get("/hello", (req, res) => {
+  res.json({ success: true, message: "hello" });
+});
 
 export type RegisterApiSpec = Tspec.DefineApiSpec<{
   tags: ["Auth"];

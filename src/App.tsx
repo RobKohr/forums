@@ -5,8 +5,8 @@ import _ from "lodash";
 import { Component, For } from "solid-js";
 import Home from "./routes";
 import About from "./routes/About";
-import Register from "./routes/register";
-import SignIn from "./routes/sign-in";
+import Register from "./routes/auth/register";
+import SignIn from "./routes/auth/sign-in";
 export interface Route {
   path: string;
   component: Component;
