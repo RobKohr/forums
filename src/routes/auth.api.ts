@@ -1,11 +1,16 @@
+import "dotenv/config";
+
 import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
 import { Request, Response, Router } from "express";
-import fs from "fs";
 import { Tspec } from "tspec";
 import Validator from "validatorjs";
+import { trimBody } from "../common/api";
 import { knex, prettyError } from "../common/db";
-import { createValidator } from "../common/validation";
+import { validate } from "../common/validation";
+import { loginRules, registerRules } from "./auth.validation";
+const jwt = require('jsonwebtoken');
+
 
 export const router = Router();
 // parse application/x-www-form-urlencoded
@@ -13,110 +18,37 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 router.use(bodyParser.json());
-interface UserProfile {
-  id: number;
-  display_name: string;
-  username: string;
-  email: string;
-}
-interface Auth {
-  id: number;
-  user_id: number;
-  username: string;
-  email: string;
-  password: string;
-}
-interface AuthToUserProfile {
-  id: number;
-  auth_id: number;
-  user_id: number;
-}
 
-function passwordStrength(value: string) {
-  value = String(value);
-  const containsAnUppercaseLetter = /[A-Z]/.test(value);
-  const containsALowercaseLetter = /[a-z]/.test(value);
-  const containsANumber = /\d/.test(value);
-  const containsASpecialCharacter = /[^a-zA-Z\d]/.test(value);
-  const numberOfPossibleCharacters =
-    (containsAnUppercaseLetter ? 26 : 0) + (containsALowercaseLetter ? 26 : 0) + (containsANumber ? 10 : 0) + (containsASpecialCharacter ? 32 : 0);
-  const strength = numberOfPossibleCharacters ** value.length;
-  return strength;
-}
-
-Validator.register(
-  "strongPassword",
-  (value) => {
-    return passwordStrength(String(value)) > 1e13;
-  },
-  `Your password is not strong enough. You can add more characters, numbers, and symbols to make it stronger.`
-);
-Validator.register(
-  "almostStrongPassword",
-  (value) => {
-    return passwordStrength(String(value)) > 1e11;
-  },
-  "Your password is almost strong enough. You can add more characters, numbers, and symbols to make it stronger."
-);
-
-const passwordListHashTable: { [password: string]: boolean } = {};
-const strongCommonPasswords = fs.readFileSync(__dirname + "/../common/strong-common-passwords.txt", "utf8").split("\n");
-strongCommonPasswords.forEach((password) => {
-  passwordListHashTable[password] = true;
-});
-
-Validator.register(
-  "commonPassword",
-  (value) => {
-    return passwordListHashTable[String(value).toLowerCase()] !== true;
-  },
-  "Your password is too common. Please choose a different password."
-);
-const rules = {
-  email: "required|email",
-  username: "required|string",
-  password: "required|string|min:8|commonPassword|almostStrongPassword|strongPassword",
-};
-
+/* Begin Register */
 const register = async (req: Request, res: Response) => {
-  Object.keys(req.body).forEach((key) => {
-    if (req.body[key].trim) {
-      req.body[key] = req.body[key].trim();
-    }
-  });
-
-  if (req.body.password !== req.body.retypePassword) {
+  const { email, username, password, retypePassword } = req.body;
+  if (password !== retypePassword) {
     res.json({ success: false, message: "Passwords do not match" });
     return;
   }
 
-  const passwordHash = bcrypt.hashSync(req.body.password, 10);
+  const passwordHash = bcrypt.hashSync(password, 10);
   /* start an sql transaction */
   knex
     .transaction(async function (trx: any) {
-      console.log("made it to sql.begin");
       const userProfile = {
-        display_name: req.body.username,
-        username: req.body.username.toLowerCase(),
-        email: req.body.email,
+        display_name: username,
+        username: username.toLowerCase(),
+        email: email.toLowerCase(),
       };
-      /* insert into user_profile using knex and get id */
       const userResult = await trx("user_profile").insert(userProfile).returning("id");
       const userId = userResult[0].id;
-      console.log("userId", userId, "userResult", userResult);
 
       const authUser = {
-        username: req.body.username.toLowerCase(),
-        email: req.body.email,
+        username: username.toLowerCase(),
+        email: email,
         password: passwordHash,
         user_id: userId,
       };
       /* insert into auth using sql and get id */
       const authResult = await trx("auth").insert(authUser).returning("id");
       const authId = authResult[0].id;
-
       if (authId && userId) {
-        /* insert into auth_to_user_profile using knex */
         await trx("auth_to_user_profile").insert({ auth_id: authId, user_id: userId });
         res.json({ success: true });
       } else {
@@ -127,11 +59,7 @@ const register = async (req: Request, res: Response) => {
       res.json({ success: false, message: prettyError(error) });
     });
 };
-
-router.post("/register", createValidator(rules, Validator), register);
-router.get("/hello", (req, res) => {
-  res.json({ success: true, message: "hello" });
-});
+router.post("/register", trimBody, validate(registerRules, Validator), register);
 
 export type RegisterApiSpec = Tspec.DefineApiSpec<{
   tags: ["Auth"];
@@ -151,22 +79,65 @@ export type RegisterApiSpec = Tspec.DefineApiSpec<{
   };
 }>;
 
-// const getBookById = (req: Request<{ id: string }>, res: Response<Book>) => {
-//   res.json({
-//     id: +req.params.id,
-//     title: "Book Title",
-//     description: "Book Description",
-//   });
-// };
 
-// export type BookApiSpec = Tspec.DefineApiSpec<{
-//   tags: ["Book"];
-//   paths: {
-//     "/books/{id}": {
-//       get: {
-//         summary: "Get book by idasdf";
-//         handler: typeof getBookById;
-//       };
-//     };
-//   };
-// }>;
+function generateAccessToken({ username, email, display_name, user_id }: { username: string, email: string, display_name: string, user_id: number }) {
+  const secret = process.env.TOKEN_SECRET;
+  if (typeof (secret) === 'string') {
+    return jwt.sign({ username, email, display_name, user_id }, secret, { expiresIn: '1800s' });
+  } else {
+    throw new Error('TOKEN_SECRET is not a string');
+  }
+}
+
+
+/* End Register */
+/* Begin Login */
+
+const login = async (req: Request, res: Response) => {
+  let { emailOrUsername, password } = req.body;
+  emailOrUsername = emailOrUsername.toLowerCase();
+
+  /* emailOrUsername can be either an email or a username */
+  const result = await knex("auth")
+    .select("auth.*", "user_profile.display_name")
+    .join("user_profile", "user_profile.id", "auth.user_id")
+    .where("auth.email", emailOrUsername)
+    .orWhere("auth.username", emailOrUsername)
+    .first();
+  if (!result) {
+    res.json({ success: false, message: "Invalid login" });
+    return;
+  }
+  const { username, email, display_name, user_id } = result;
+
+  const passwordMatch = bcrypt.compareSync(password, result.password);
+  /* add jwt token */
+
+
+  if (!passwordMatch) {
+    res.json({ success: false, message: "Invalid login" });
+    return;
+  } else {
+    const token = generateAccessToken({ username, email, display_name, user_id })
+    res.json({ success: true, message: "Login successful", token });
+  }
+
+};
+
+router.post("/login", trimBody, validate(loginRules, Validator), login);
+
+export type LoginApiSpec = Tspec.DefineApiSpec<{
+  tags: ["Auth"];
+  paths: {
+    "/auth/login": {
+      post: {
+        summary: "Login a user";
+        body: {
+          emailOrUsername: string;
+          password: string;
+        };
+        handler: typeof login;
+      };
+    };
+  };
+}>;

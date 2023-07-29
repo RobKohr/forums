@@ -9,6 +9,7 @@ const configs = {
 };
 
 export const knex = require("knex")(knexfile.development);
+
 const { host, port, database, username, password } = configs;
 export const sql = postgres({ host, port, database, username, password });
 

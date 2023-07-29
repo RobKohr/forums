@@ -9,7 +9,7 @@ export const rules = {
   gender: "string",
 };
 
-export function createValidator(rules: Validator.Rules, Validator: Validator.ValidatorStatic) {
+export function validate(rules: Validator.Rules, Validator: Validator.ValidatorStatic) {
   return async (req: Request, res: Response, next: NextFunction) => {
     const validator = new Validator(req.body, rules);
 
