@@ -19,9 +19,11 @@ global.log = (...args: any[]) => {
 };
 
 const express = require("express"),
-  bodyParser = require("body-parser"),
-  swaggerJsdoc = require("swagger-jsdoc"),
-  swaggerUi = require("swagger-ui-express");
+  bodyParser = require("body-parser")
+
+
+import 'swagger-jsdoc';
+import 'swagger-ui-express';
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -33,7 +35,7 @@ app.use(bodyParser.json());
 
 const port = process.env["API_PORT"] || 9999;
 
-import { router as authRouter } from "./routes/auth.api";
+import { router as authRouter } from "../src/routes/auth.api";
 const initServer = async () => {
   const app = express();
   /* output every api request's path and method to the console, if that file isn't a static file*/
