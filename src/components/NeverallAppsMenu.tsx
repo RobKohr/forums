@@ -1,20 +1,11 @@
+import AppsIcon from "../assets/icons/apps.svg";
 import NeverallLogo from "../assets/icons/neverall-logo.svg";
-
+import "./NeverallAppsMenu.scss";
 export default function NeverallAppsMenu() {
   return (
-    <div class="logo-container">
-      <a href="https://neverall.com">
-        <NeverallLogo
-          style={{
-            width: "60px",
-            height: "60px",
-            fill: "white",
-            position: "relative",
-            top: "-10px",
-            left: "0px",
-          }}
-        />
-      </a>
+    <div class="neverall-apps-component">
+      <NeverallLogo class="neverall-logo" />
+      <AppsIcon class="apps-icon" />
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.account-image-component {
+  line-height: var(--headerHeight);
+  padding-top: 6px;
+  padding-right: 1rem;
+  color: white;
+  .user-icon {
+    border: 1px solid white;
+    border-radius: 50%;
+  }
+}
