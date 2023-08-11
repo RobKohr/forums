@@ -10,7 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "migrate": "knex migrate:latest"
+    "migrate": "knex migrate:latest",
+    "server": "cd src/server; npm start"
   },
   "license": "MIT",
   "devDependencies": {
