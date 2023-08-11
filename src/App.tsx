@@ -3,7 +3,9 @@
 import { Route, Routes } from "@solidjs/router";
 import _ from "lodash";
 import { Component, For } from "solid-js";
+import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import Search from "./components/Search/Search";
 import Home from "./routes";
 import About from "./routes/About";
 import Register from "./routes/auth/register";
@@ -51,23 +53,17 @@ const App: Component = () => {
   return (
     <div id="app">
       <Header />
-      <div id="content">
-        <Routes>
-          <For each={routes}>{(route) => <Route path={route.path} component={route.component} />}</For>
-          <Route path="*" component={NotFound} />
-        </Routes>
+      <div id="content-container">
+        <div id="content">
+          <Routes>
+            <For each={routes}>{(route) => <Route path={route.path} component={route.component} />}</For>
+            <Route path="*" component={NotFound} />
+          </Routes>
+        </div>
       </div>
       <Footer />
     </div>
   );
 };
-
-export function Footer() {
-  return (
-    <div id="footer">
-      Powered by <a href="https://solidjs.com">SolidJS</a>
-    </div>
-  );
-}
 
 export default App;

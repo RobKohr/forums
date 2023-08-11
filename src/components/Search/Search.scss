@@ -1,0 +1,12 @@
+.search-component {
+  width: calc(100vw - 2rem);
+  padding-bottom: 1rem;
+  max-width: 600px;
+  margin: auto;
+  input {
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+}

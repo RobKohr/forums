@@ -11,7 +11,6 @@ import { validate } from "../common/validation";
 import { loginRules, registerRules } from "./auth.validation";
 const jwt = require('jsonwebtoken');
 
-
 export const router = Router();
 // parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false }));

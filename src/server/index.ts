@@ -1,8 +1,9 @@
 /* Copyright Robert Kohr 2023 - All Rights Reserved */
 
-import "dotenv/config";
+import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
 import { TspecDocsMiddleware } from "tspec";
+dotenv.config({ path: '../../.env' });
 
 declare global {
   var start: number;
@@ -35,7 +36,7 @@ app.use(bodyParser.json());
 
 const port = process.env["API_PORT"] || 9999;
 
-import { router as authRouter } from "../src/routes/auth.api";
+import { router as authRouter } from "./routes/auth.api";
 const initServer = async () => {
   const app = express();
   /* output every api request's path and method to the console, if that file isn't a static file*/

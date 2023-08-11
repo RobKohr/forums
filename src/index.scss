@@ -143,9 +143,14 @@ a,
 }
 
 #app {
-  background: green;
+    background:white;
 
 }
-#content {
+#content-container {
   margin-top: var(--headerHeight);
+  padding-top:0.5rem;
+}
+#search-container{
+  background:yellow;
+  text-align: center;
 }
