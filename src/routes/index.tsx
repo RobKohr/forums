@@ -1,4 +1,4 @@
-import Lipsum from "../components/Lipsum";
+import Lipsum from "../components/Lipsum/Lipsum";
 
 export default function Home() {
   return (

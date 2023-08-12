@@ -1,4 +1,5 @@
 import AccountImage from "../AccountImage/AccountImage";
+import { addParagraph } from "../Lipsum/Lipsum.state";
 import Logo from "../Logo";
 import NeverallAppsMenu from "../NeverallAppsMenu";
 import Search from "../Search/Search";
@@ -13,6 +14,9 @@ export default function Header() {
       <div class="header-sub">
         <NeverallAppsMenu />
         <AccountImage />
+      </div>
+      <div>
+        <button onClick={addParagraph}>+</button>
       </div>
       <div class="header-sub below hidden">
         <Search />

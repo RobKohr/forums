@@ -1,18 +1,8 @@
-import { For, Show, createSignal } from "solid-js";
-import { numberToArray } from "../utils";
-const [paragraphs, setParagraphs] = createSignal<number>(2);
+import { For, Show } from "solid-js";
+import { numberToArray } from "../../utils";
+import { addParagraph, paragraphs, removeParagraph } from "./Lipsum.state";
 
 export default function Lipsum(props: { startingParagraphs: number }) {
-  function addParagraph() {
-    setParagraphs(paragraphs() + 1);
-  }
-  function removeParagraph() {
-    setParagraphs(paragraphs() - 1);
-  }
-
-  console.log("render", paragraphs());
-  const time = new Date().getTime();
-  const initialCount = paragraphs();
   return (
     <div>
       <For each={numberToArray(paragraphs())}>
