@@ -1,9 +1,8 @@
 import { For, Show, createSignal } from "solid-js";
 import { numberToArray } from "../utils";
+const [paragraphs, setParagraphs] = createSignal<number>(2);
 
 export default function Lipsum(props: { startingParagraphs: number }) {
-  const [paragraphs, setParagraphs] = createSignal<number>(props.startingParagraphs);
-
   function addParagraph() {
     setParagraphs(paragraphs() + 1);
   }
