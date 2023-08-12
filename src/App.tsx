@@ -1,16 +1,15 @@
 /* Copyright Robert Kohr 2023 - All Rights Reserved */
 
 import { Route, Routes } from "@solidjs/router";
-import _ from "lodash";
+import capitalize from "lodash.capitalize";
 import { Component, For } from "solid-js";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import Search from "./components/Search/Search";
 import Home from "./routes";
 import About from "./routes/About";
 import Register from "./routes/auth/register";
 import SignIn from "./routes/auth/sign-in";
-export interface Route {
+export interface AppRoute {
   path: string;
   component: Component;
   label?: string;
@@ -20,7 +19,7 @@ window.addEventListener("popstate", function () {
   console.log("change event");
 });
 
-const routes: Route[] = [
+const routes: AppRoute[] = [
   { path: "/", component: Home },
   { path: "/about", component: About },
   { path: "/sign-in", component: SignIn },
@@ -28,7 +27,7 @@ const routes: Route[] = [
 ];
 
 routes.forEach((route) => {
-  route.label = _.capitalize(route.path.replace("/", ""));
+  route.label = capitalize(route.path.replace("/", ""));
   if (!route.label) {
     route.label = "Home";
   }
@@ -53,7 +52,7 @@ const App: Component = () => {
   return (
     <div id="app">
       <Header />
-      <div id="content-container">
+      <div id="content-container" class="headerBelowShown">
         <div id="content">
           <Routes>
             <For each={routes}>{(route) => <Route path={route.path} component={route.component} />}</For>

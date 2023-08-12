@@ -1,8 +1,8 @@
 import { A } from "@solidjs/router";
 import { For } from "solid-js";
-import { Route } from "../App";
+import type { AppRoute } from "../App";
 
-export function Navigation(props: { routes: Route[] }) {
+export function Navigation(props: { routes: AppRoute[] }) {
   return (
     <nav>
       <ul>

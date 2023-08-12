@@ -18,13 +18,12 @@
   }
   .below {
     position: absolute;
-    height: var(--headerHeight);
+    height: var(--belowHeaderHeight);
     box-sizing: border-box;
     padding: 1.5rem;
     top: 60px;
     left: 0px;
     right: 0px;
-    background: white;
-    height: 60px;
+    background: red;
   }
 }
