@@ -14,7 +14,7 @@ export default function Header() {
         <NeverallAppsMenu />
         <AccountImage />
       </div>
-      <div class="header-sub" style="position:absolute; top:100px; left:0px; right:0px;background:white; height:100px;">
+      <div class="header-sub below hidden">
         <Search />
       </div>
     </div>

@@ -13,7 +13,7 @@
   --secondaryHeaderBg: #e6eeff;
   --white: #ffffff;
   --shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-  --headerHeight: 3.75rem;
+  --headerHeight: 4rem;
   --mobileWidth: 400px;
   --logoContainerWidth: 60px;
   --fontColor: #333333;
@@ -153,4 +153,12 @@ a,
 #search-container{
   background:yellow;
   text-align: center;
+}
+
+.padded{
+  padding: 1rem;
+}
+
+.hidden{
+  display:none;
 }
