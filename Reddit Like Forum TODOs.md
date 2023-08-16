@@ -1,5 +1,46 @@
 https://thenounproject.com/icon/forum-3327115/ 
 
+Spam detection: https://www.explainxkcd.com/wiki/index.php/810:_Constructive
+
+Is this comment insightful or constructive? (yes/no)
+
+Is this comment spam? (yes/no)
+
+Is this comment abusive? (yes/no)
+
+Is this comment off-topic? (yes/no)
+
+
+Or: 
+
+Instead of using captchas like [this], to post to this site, we will ask you to rate some content to help determine if it is spam. Afterwards, others will do the same for you post.
+
+This all helps us keep the site clean and free of spam.
+
+
+Are you ok with rating NSFW content? (yes/no) 
+
+Which of these is most NSFW?
+A or B  (A/B)
+
+Or maybe, please apply the appropriate tags to this post:
+Not Safe For Work (NSFW), Funny/Sarcastic, Spam, Abusive, Off Topic, Other
+
+If user choses no:
+"We will try to show you safe for work content. But we can't guarantee it. Are you ok with that? (yes/no)"
+
+Which of these comments are more insightful and constructive? 
+
+A or B  (A/B)
+
+I would give the most correct answers, and matching those would give users more weight. The people who have the most matches to me, would have more weight. And the ones that match most to those people would get 50% of their weight and so on. 
+
+Is this comment insightful or constructive? (yes/no/unsure)
+
+
+
+
+
 Allow designs like https://old.reddit.com/r/gameofthrones/
 Some data seeding: https://urlroulette.net/
 - [ ] Register a user

@@ -76,6 +76,10 @@ a,
     text-decoration: underline;
   }
 }
+.underline {
+  text-decoration: underline;
+}
+
 .shadow {
   box-shadow: var(--shadow);
 }
@@ -86,9 +90,9 @@ a,
 #content-container {
   margin-top: var(--headerHeight);
   padding-top: 0.5rem;
-}
-#content-container.headerBelowShown {
-  margin-top: calc(var(--headerHeight) + var(--belowHeaderHeight));
+  &.headerBelowShown {
+    margin-top: calc(var(--headerHeight) + var(--belowHeaderHeight));
+  }
 }
 #search-container {
   background: yellow;

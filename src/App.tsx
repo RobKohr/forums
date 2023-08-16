@@ -5,6 +5,7 @@ import capitalize from "lodash.capitalize";
 import { Component, For } from "solid-js";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import { MenuModal } from "./components/MenuModal/MenuModal";
 import Home from "./routes";
 import About from "./routes/About";
 import Register from "./routes/auth/register";
@@ -22,8 +23,8 @@ window.addEventListener("popstate", function () {
 const routes: AppRoute[] = [
   { path: "/", component: Home },
   { path: "/about", component: About },
-  { path: "/sign-in", component: SignIn },
-  { path: "/sign-up", component: Register },
+  { path: "/auth/sign-in", component: SignIn },
+  { path: "/auth/sign-up", component: Register },
 ];
 
 routes.forEach((route) => {
@@ -51,6 +52,7 @@ const App: Component = () => {
   console.log(routes);
   return (
     <div id="app">
+      <MenuModal />
       <Header />
       <div id="content-container" class="headerBelowShown">
         <div id="content">

@@ -1,6 +1,6 @@
 import AccountImage from "../AccountImage/AccountImage";
 import Logo from "../Logo";
-import NeverallAppsMenu from "../NeverallAppsMenu";
+import NeverallAppsMenu from "../NeverallAppsMenu/NeverallAppsMenu";
 import Search from "../Search/Search";
 import "./Header.scss";
 export default function Header() {

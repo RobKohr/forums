@@ -1,12 +1,18 @@
+import { A } from "@solidjs/router";
 import { createFormControl, createFormGroup } from "solid-forms";
 import { createEffect } from "solid-js";
-import { TextInput } from "../../components/forms/TextInput";
+import { closeMenuModal } from "../../components/MenuModal/MenuModalState";
+import { TextInput } from "../../components/forms/TextInput/TextInput";
 import { required } from "../../validators";
 
 export default function SignIn() {
   const group = createFormGroup({
     username: createFormControl(""),
     email: createFormControl("", {
+      required: true,
+      validators: [required],
+    }),
+    password: createFormControl("", {
       required: true,
       validators: [required],
     }),
@@ -28,7 +34,7 @@ export default function SignIn() {
   };
 
   return (
-    <div>
+    <div class="padded">
       <form onSubmit={onSubmit}>
         <TextInput label="Your Username" name="name" control={group.controls.username} />
         <TextInput label="Your email address" name="email" type="email" control={group.controls.email} />
@@ -36,8 +42,17 @@ export default function SignIn() {
         <TextInput label="Retype Password" name="retypePassword" type="retypePassword" control={group.controls.retypePassword} />
         <button>Submit</button>
       </form>
+      <p>
+        New to the site?{" "}
+        <A href="auth/sign-up" class="underline" onclick={closeMenuModal}>
+          Sign Up »
+        </A>
+      </p>
+
       <div>
-        <a href="/sign-up">Sign Up</a>
+        <A href="auth/forgot-password" class="underline" onclick={closeMenuModal}>
+          Forgot Username/Password »
+        </A>
       </div>
     </div>
   );
