@@ -7,7 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import { MenuModal } from "./components/MenuModal/MenuModal";
 import Home from "./routes";
-import About from "./routes/About";
+import About from "./routes/about";
 import Register from "./routes/auth/register";
 import SignIn from "./routes/auth/sign-in";
 export interface AppRoute {
@@ -34,22 +34,22 @@ routes.forEach((route) => {
   }
 });
 
-function urlEncode(str: string) {
-  return encodeURIComponent(str).replace(/%20/g, "+");
-}
+// function urlEncode(str: string) {
+//   return encodeURIComponent(str).replace(/%20/g, "+");
+// }
 
 function NotFound() {
   return <div>Page Not Found</div>;
 }
-export function signIn() {
-  console.log("sign in");
-  const path = window.location.href.split("?")[0];
-  window.location.href = `/sign-in?returnTo=${urlEncode(path || "/")}`;
-}
+
+// export function signIn() {
+//   console.log("sign in");
+//   const path = window.location.href.split("?")[0];
+//   window.location.href = `/sign-in?returnTo=${urlEncode(path || "/")}`;
+// }
 
 // const VITE_VARIABLE_NAME = import.meta.env["VITE_VARIABLE_NAME"];
 const App: Component = () => {
-  console.log(routes);
   return (
     <div id="app">
       <MenuModal />

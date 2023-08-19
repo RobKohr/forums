@@ -8,7 +8,7 @@ import Validator from "validatorjs";
 import { trimBody } from "../common/api";
 import { knex, prettyError } from "../common/db";
 import { validate } from "../common/validation";
-import { loginRules, registerRules } from "./auth.validation";
+import { loginRules, registerRules } from "../validation/auth.validation";
 const jwt = require('jsonwebtoken');
 
 export const router = Router();

@@ -26,6 +26,7 @@ export default function SignIn() {
   });
 
   const onSubmit = async () => {
+    console.log();
     if (group.isSubmitted || !group.isValid) return;
 
     group.markSubmitted(true);
