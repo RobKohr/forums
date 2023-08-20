@@ -5,69 +5,77 @@ import { Accessor, createSignal } from "solid-js";
 interface UseFormProps {
     initialData?: { [key: string]: string };
     validation: Joi.ObjectSchema<any>;
+    validationMessageRewrite: (validationResult: Joi.ValidationResult<any>) => Joi.ValidationResult<any>;
 }
 export interface Form {
     data: any;
     set: (data: any) => void;
-    validation: Joi.ObjectSchema<any>;
-    touched: Accessor<{}>;
+    validationResult: Accessor<Joi.ValidationResult<any> | undefined>;
+    touched: Accessor<TouchedData>;
     setFieldValue: (field: string, value: string) => void;
     inputChangeHandler: (name: string) => (e: Event) => void;
 }
 
+interface FormData {
+    [key: string]: string;
+}
+interface TouchedData {
+    [key: string]: boolean;
+}
 interface UseFormOutput {
     formDecorator: (element: HTMLFormElement, dispose: () => any) => void;
     form: Form
 }
 
-export default function useForm({ initialData, validation }: UseFormProps) {
-    const [formData, setFormData] = createSignal(initialData || {});
-    const [touched, setTouched] = createSignal({});
-    const [validationResult, setValidationResult] = createSignal<Joi.ValidationResult<any>>();
+function defaultSchemaMessageRewrite(validationResult: Joi.ValidationResult<any>) {
+    return validationResult;
+}
 
-    function validate() {
-        setValidationResult(validation.validate(formData(), { abortEarly: false }))
-        console.log(JSON.stringify(validationResult(), null, 2))
+export default function useForm({ initialData, validation, validationMessageRewrite = defaultSchemaMessageRewrite }: UseFormProps) {
+    const [formData, setFormData] = createSignal<FormData>(initialData || {});
+    const initialTouchData: TouchedData = { test: true };
+    const [touched, setTouched] = createSignal<TouchedData>(initialTouchData);
+    const [validationResult, setValidationResult] = createSignal<Joi.ValidationResult<any> | undefined>();
 
-        // if (validationResult()?.error) {
-        //     console.error(validationResult()?.error);
-        // } else if (validationResult()?.value) {
-        //     console.log(validationResult()?.value);
-        // } else {
-        //     console.error("no error, no value", validationResult);
-        // }
+    function validate(): boolean {
+        setValidationResult(
+            validationMessageRewrite(validation.validate(formData(), { abortEarly: false }))
+        )
+        if (validationResult()?.error) {
+            return false
+        } else {
+            return true
+        }
     }
 
     function formDecorator(element: HTMLFormElement, _: () => any): void {
         element.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const validationResult = validation.validate(formData, { abortEarly: false });
-            if (validationResult.error) {
-                console.error(validationResult.error);
-            } else if (validationResult.value) {
-                console.log(validationResult.value);
+            if (validate()) {
+                console.log('validation passes')
             } else {
-                console.error("no error, no value", validationResult);
+                console.log('validation fails')
             }
         });
     }
     const form = {
         data: formData,
         set: setFormData,
-        validation: validation,
-        touched: touched,
+        validationResult,
+        touched,
         setFieldValue: (field: string, value: string) => {
             setFormData({ [field]: value });
         },
         inputChangeHandler: (name: string) => (e: Event) => {
             const target = e.target as HTMLInputElement;
-            setFormData({ [name]: target.value });
-            setTouched({ [name]: true });
+            setFormData({ ...formData(), [name]: target.value });
+            setTouched({ ...touched(), [name]: true });
             validate();
-            console.log('formdata', formData())
         }
     };
-
+    const name = 'test'
+    console.log(form.touched()?.[name]);
     const useFormOutput: UseFormOutput = { formDecorator, form };
+    validate()
     return useFormOutput;
 }

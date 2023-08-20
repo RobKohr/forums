@@ -21,8 +21,6 @@ export default function SignIn() {
   // This will automatically re-run whenever `group.isDisabled`, `group.isValid` or `group.value` change
   createEffect(() => {
     if (group.isDisabled || !group.isValid) return;
-
-    console.log("Current group value", group.value);
   });
 
   const onSubmit = async () => {

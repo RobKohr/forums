@@ -18,7 +18,7 @@ export function validate(rules: Validator.Rules, Validator: Validator.ValidatorS
     }
 
     function fails() {
-      console.log("validator.errors", validator.errors);
+      console.info("validator.errors", validator.errors);
       res.status(412).send({
         success: false,
         message: "Validation failed",

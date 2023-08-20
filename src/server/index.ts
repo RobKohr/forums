@@ -11,12 +11,12 @@ declare global {
   function log(...args: any[]): void;
 }
 global.start = Date.now();
-console.log(`Server startup process began at ${new Date(global.start)}`);
+console.info(`Server startup process began at ${new Date(global.start)}`);
 global.secondsSinceStart = () => {
   return (Date.now() - global.start) / 1000;
 };
 global.log = (...args: any[]) => {
-  console.log(global.secondsSinceStart(), ...args);
+  console.info(global.secondsSinceStart(), ...args);
 };
 
 const express = require("express"),

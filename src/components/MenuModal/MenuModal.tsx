@@ -7,14 +7,12 @@ import MenuModalAccount from "./MenuModalAccount/MenuModalAccount";
 import { menuModalActive, setMenuModalActive } from "./MenuModalState";
 import X from "./x.svg";
 export function MenuModal() {
-  const navigate = useNavigate();
   return (
     <Show when={menuModalActive()}>
       <div id="menu-modal" class={menuModalActive()}>
         <div
           class="x-container clickable"
           onClick={() => {
-            console.log("clicked");
             setMenuModalActive("");
           }}
         >

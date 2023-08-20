@@ -16,10 +16,6 @@ export interface AppRoute {
   label?: string;
 }
 
-window.addEventListener("popstate", function () {
-  console.log("change event");
-});
-
 const routes: AppRoute[] = [
   { path: "/", component: Home },
   { path: "/about", component: About },

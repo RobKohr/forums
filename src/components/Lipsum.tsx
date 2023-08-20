@@ -9,10 +9,6 @@ export default function Lipsum(props: { startingParagraphs: number }) {
   function removeParagraph() {
     setParagraphs(paragraphs() - 1);
   }
-
-  console.log("render", paragraphs());
-  const time = new Date().getTime();
-  const initialCount = paragraphs();
   return (
     <div>
       <For each={numberToArray(paragraphs())}>
