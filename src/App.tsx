@@ -10,6 +10,7 @@ import Home from "./routes";
 import About from "./routes/about";
 import Register from "./routes/auth/register";
 import SignIn from "./routes/auth/sign-in";
+import Test from "./routes/test";
 export interface AppRoute {
   path: string;
   component: Component;
@@ -21,6 +22,7 @@ const routes: AppRoute[] = [
   { path: "/about", component: About },
   { path: "/auth/sign-in", component: SignIn },
   { path: "/auth/sign-up", component: Register },
+  { path: "/test", component: Test },
 ];
 
 routes.forEach((route) => {
