@@ -48,7 +48,7 @@ declare module "solid-js" {
 }
 
 // wrap children in provider
-export default function FailedFormContextProvider(props: FormContextProviderProps) {
+export default function FormContextProvider(props: FormContextProviderProps) {
   const [formData, setFormData] = createSignal<FormData>(props.initialData || {});
   const initialTouchData: TouchedData = { test: true };
   const [touched, setTouched] = createSignal<TouchedData>(initialTouchData);

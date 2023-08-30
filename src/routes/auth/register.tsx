@@ -1,6 +1,5 @@
 import Joi from "joi";
-import FailedFormContextProvider from "../../../src/components/FailedFormContextProvider/FailedFormContextProvider";
-//src/components/FailedFormContextProvider/FailedFormContextProvider.tsx
+import FormContextProvider from "../../components/FormContextProvider/FormContextProvider";
 import InputText from "../../components/forms/InputText/InputText";
 
 const registrationSchema = Joi.object({
@@ -24,7 +23,7 @@ function registrationSchemaMessageRewrite(validationResult: Joi.ValidationResult
 export default function Register() {
   const initialData = { username: "", password: "", repeat_password: "" };
   return (
-    <FailedFormContextProvider initialData={initialData} validation={registrationSchema} postValidation={registrationSchemaMessageRewrite}>
+    <FormContextProvider initialData={initialData} validation={registrationSchema} postValidation={registrationSchemaMessageRewrite}>
       <InputText label="Username" name="username" type="text" />
       <InputText label="Email" name="email" type="email" />
       <InputText label="Password" name="password" type="password" />
@@ -33,6 +32,6 @@ export default function Register() {
         <input type="checkbox" name="terms" /> I agree to the terms and conditions
       </div>
       <input type="submit" value="Submit" />
-    </FailedFormContextProvider>
+    </FormContextProvider>
   );
 }
