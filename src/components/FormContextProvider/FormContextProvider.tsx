@@ -26,6 +26,7 @@ export interface FormContextProviderProps {
   initialData: { [key: string]: any };
   validation?: Joi.ObjectSchema<any>;
   postValidation?: (validationResult: Joi.ValidationResult<any>) => Joi.ValidationResult<any>;
+  onSubmit: (data: any) => void;
 }
 
 interface FormData {
@@ -71,6 +72,7 @@ export default function FormContextProvider(props: FormContextProviderProps) {
     element.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (validate()) {
+        props.onSubmit(formData());
         console.log("validation passes");
       } else {
         console.log("validation fails");

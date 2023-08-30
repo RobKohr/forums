@@ -20,10 +20,19 @@ function registrationSchemaMessageRewrite(validationResult: Joi.ValidationResult
   return validationResult;
 }
 
+function onSubmit(data: any) {
+  console.log(data);
+}
+
 export default function Register() {
   const initialData = { username: "", password: "", repeat_password: "" };
   return (
-    <FormContextProvider initialData={initialData} validation={registrationSchema} postValidation={registrationSchemaMessageRewrite}>
+    <FormContextProvider
+      initialData={initialData}
+      validation={registrationSchema}
+      postValidation={registrationSchemaMessageRewrite}
+      onSubmit={onSubmit}
+    >
       <InputText label="Username" name="username" type="text" />
       <InputText label="Email" name="email" type="email" />
       <InputText label="Password" name="password" type="password" />
