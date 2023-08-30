@@ -1,5 +1,6 @@
 import type Joi from "joi";
 import { Accessor, createContext, createSignal, useContext } from "solid-js";
+import type { Validator } from "../../../server/common/validation";
 
 export const FormContext = createContext<Form>();
 
@@ -24,7 +25,7 @@ export interface Form {
 export interface FormContextProviderProps {
   children: any;
   initialData: { [key: string]: any };
-  validation?: Joi.ObjectSchema<any>;
+  validation?: Validator;
   postValidation?: (validationResult: Joi.ValidationResult<any>) => Joi.ValidationResult<any>;
   onSubmit: (data: any) => void;
 }
@@ -60,7 +61,7 @@ export default function FormContextProvider(props: FormContextProviderProps) {
     if (!props.validation) {
       return true;
     }
-    setValidationResult(postValidation(props.validation.validate(formData(), { abortEarly: false })));
+    setValidationResult(props.validation(formData()));
     if (validationResult()?.error) {
       return false;
     } else {

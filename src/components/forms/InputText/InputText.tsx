@@ -1,5 +1,5 @@
 import { createEffect, createSignal } from "solid-js";
-import { useForm } from "../../FormContextProvider/FormContextProvider";
+import { useForm } from "../FormContextProvider/FormContextProvider";
 
 interface InputTextProps {
   label: string;

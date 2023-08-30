@@ -1,25 +1,25 @@
 import fs from "fs";
-import Validator from "validatorjs";
-interface UserProfile {
-    id: number;
-    display_name: string;
-    username: string;
-    email: string;
-}
-interface Auth {
-    id: number;
-    user_id: number;
-    username: string;
-    email: string;
-    password: string;
-}
-interface AuthToUserProfile {
-    id: number;
-    auth_id: number;
-    user_id: number;
-}
+import Joi from "joi";
+import { createValidation } from "../common/validation";
 
-
+let isOnServer = false;
+let customRuleCommonPassword = (value: string) => {
+    return value; // skip this check on the client
+}
+if (isOnServer) {
+    const passwordListHashTable: { [password: string]: boolean } = {};
+    const strongCommonPasswords = fs.readFileSync(__dirname + "/../common/strong-common-passwords.txt", "utf8").split("\n");
+    strongCommonPasswords.forEach((password: string) => {
+        passwordListHashTable[password] = true;
+    });
+    customRuleCommonPassword = (value: string) => {
+        if (passwordListHashTable[String(value).toLowerCase()] !== true) {
+            return value;
+        } else {
+            throw new Error("Your password is too common. Please choose a different password.");
+        }
+    }
+}
 
 function passwordStrength(value: string) {
     value = String(value);
@@ -32,41 +32,41 @@ function passwordStrength(value: string) {
     const strength = numberOfPossibleCharacters ** value.length;
     return strength;
 }
+function customRuleStrongPassword(value: string) {
+    if (passwordStrength(String(value)) > 1e16) {
+        return value;
+    } else {
+        throw new Error("Add more letters, numbers, and symbols to make stronger.");
+    }
+}
+
+const registrationSchema = Joi.object({
+    email: Joi.string().email({ tlds: false }).required(),
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().min(8).custom(customRuleCommonPassword).custom(customRuleStrongPassword).required(),
+    repeat_password: Joi.ref("password"),
+}).with("password", "repeat_password");
+
+function registrationPostValidation(validationResult: Joi.ValidationResult) {
+    if (validationResult.error?.details?.length) {
+        validationResult.error.details.forEach((error) => {
+            if (error.context?.key === "repeat_password") {
+                error.message = "Passwords do not match";
+            }
+            if (error.message.includes('failed custom validation because ')) {
+                error.message = error.message.split('failed custom validation because ')[1];
+            }
+        });
+    }
+    return validationResult;
+}
 
 
-Validator.register(
-    "strongPassword",
-    (value) => {
-        return passwordStrength(String(value)) > 1e13;
-    },
-    `Your password is not strong enough. You can add more characters, numbers, and symbols to make it stronger.`
-);
+export const registrationValidation = createValidation(registrationSchema, registrationPostValidation);
 
+const loginSchema = Joi.object({
+    emailOrUsername: Joi.string().required(),
+    password: Joi.string().required(),
+})
 
-
-const passwordListHashTable: { [password: string]: boolean } = {};
-const strongCommonPasswords = fs.readFileSync(__dirname + "/../common/strong-common-passwords.txt", "utf8").split("\n");
-
-
-strongCommonPasswords.forEach((password: string) => {
-    passwordListHashTable[password] = true;
-});
-
-
-Validator.register(
-    "commonPassword",
-    (value) => {
-        return passwordListHashTable[String(value).toLowerCase()] !== true;
-    },
-    "Your password is too common. Please choose a different password."
-);
-export const registerRules = {
-    email: "required|email",
-    username: "required|string",
-    password: "required|string|min:8|commonPassword|strongPassword",
-};
-
-export const loginRules = {
-    emailOrUsername: "required|string",
-    password: "required|string",
-};
+export const loginValidation = createValidation(loginSchema);

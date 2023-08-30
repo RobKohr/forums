@@ -4,11 +4,9 @@ import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
 import { Request, Response, Router } from "express";
 import { Tspec } from "tspec";
-import Validator from "validatorjs";
-import { trimBody } from "../common/api";
-import { knex, prettyError } from "../common/db";
-import { validate } from "../common/validation";
-import { loginRules, registerRules } from "../validation/auth.validation";
+import { trimBody, validate } from "../apiUtils";
+import { knex, prettyError } from "../db";
+import { loginValidation, registrationValidation } from "../validation/auth.validation";
 const jwt = require('jsonwebtoken');
 
 export const router = Router();
@@ -58,7 +56,7 @@ const register = async (req: Request, res: Response) => {
       res.json({ success: false, message: prettyError(error) });
     });
 };
-router.post("/register", trimBody, validate(registerRules, Validator), register);
+router.post("/register", trimBody, validate(registrationValidation), register);
 
 export type RegisterApiSpec = Tspec.DefineApiSpec<{
   tags: ["Auth"];
@@ -123,7 +121,7 @@ const login = async (req: Request, res: Response) => {
 
 };
 
-router.post("/login", trimBody, validate(loginRules, Validator), login);
+router.post("/login", trimBody, validate(loginValidation), login);
 
 export type LoginApiSpec = Tspec.DefineApiSpec<{
   tags: ["Auth"];
