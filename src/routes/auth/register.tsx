@@ -1,6 +1,7 @@
 import Joi from "joi";
+import FailedFormContextProvider from "../../../src/components/FailedFormContextProvider/FailedFormContextProvider";
+//src/components/FailedFormContextProvider/FailedFormContextProvider.tsx
 import InputText from "../../components/forms/InputText/InputText";
-import useForm from "../../components/forms/useForm";
 
 const registrationSchema = Joi.object({
   email: Joi.string().email({ tlds: false }).required(),
@@ -20,32 +21,18 @@ function registrationSchemaMessageRewrite(validationResult: Joi.ValidationResult
   return validationResult;
 }
 
-declare module "solid-js" {
-  namespace JSX {
-    interface Directives {
-      formDecorator: boolean;
-    }
-  }
-}
-
 export default function Register() {
-  const { formDecorator, form } = useForm({
-    initialData: { username: "", password: "", repeat_password: "" },
-    validation: registrationSchema,
-    validationMessageRewrite: registrationSchemaMessageRewrite,
-  });
-  true && formDecorator; // hack to prevent unused variable error
-
+  const initialData = { username: "", password: "", repeat_password: "" };
   return (
-    <form use:formDecorator>
-      <InputText label="Username" name="username" type="text" form={form} />
-      <InputText label="Email" name="email" type="email" form={form} />
-      <InputText label="Password" name="password" type="password" form={form} />
-      <InputText label="Repeat Password" name="repeat_password" type="password" form={form} />
+    <FailedFormContextProvider initialData={initialData} validation={registrationSchema} postValidation={registrationSchemaMessageRewrite}>
+      <InputText label="Username" name="username" type="text" />
+      <InputText label="Email" name="email" type="email" />
+      <InputText label="Password" name="password" type="password" />
+      <InputText label="Repeat Password" name="repeat_password" type="password" />
       <div>
         <input type="checkbox" name="terms" /> I agree to the terms and conditions
       </div>
       <input type="submit" value="Submit" />
-    </form>
+    </FailedFormContextProvider>
   );
 }

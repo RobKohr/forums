@@ -73,8 +73,6 @@ export default function useForm({ initialData, validation, validationMessageRewr
             validate();
         }
     };
-    const name = 'test'
-    console.log(form.touched()?.[name]);
     const useFormOutput: UseFormOutput = { formDecorator, form };
     validate()
     return useFormOutput;

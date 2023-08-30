@@ -1,15 +1,21 @@
 import { createEffect, createSignal } from "solid-js";
-import type { Form } from "../useForm";
+import { useForm } from "../../FailedFormContextProvider/FailedFormContextProvider";
 
 interface InputTextProps {
   label: string;
   name: string;
   type: string;
-  form: Form;
 }
 
 export default function InputText(props: InputTextProps) {
-  const { label, name, type, form } = props;
+  const { label, name, type } = props;
+  const form = useForm();
+
+  console.log(form);
+  if (form === undefined) {
+    return <div>FormContextProvider not found</div>;
+  }
+
   const [error, setError] = createSignal("");
 
   createEffect(() => {
@@ -26,7 +32,7 @@ export default function InputText(props: InputTextProps) {
 
   return (
     <div>
-      <input type={type} name={name} id={name} placeholder={label} value={props.form.data[name] || ""} onInput={form.inputChangeHandler(name)} />
+      <input type={type} name={name} id={name} placeholder={label} value={form.data[name] || ""} onInput={form.inputChangeHandler(name)} />
       <div class="error">{form.touched()?.[name] && error()}&nbsp;</div>
     </div>
   );
