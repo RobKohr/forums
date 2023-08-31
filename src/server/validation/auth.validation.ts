@@ -36,14 +36,14 @@ function customRuleStrongPassword(value: string) {
     if (passwordStrength(String(value)) > 1e16) {
         return value;
     } else {
-        throw new Error("Add more letters, numbers, and symbols to make stronger.");
+        throw new Error("Add more letters, numbers, and symbols to make a stronger password.");
     }
 }
 
 const registrationSchema = Joi.object({
-    email: Joi.string().email({ tlds: false }).required(),
-    username: Joi.string().alphanum().min(3).max(30).required(),
-    password: Joi.string().min(8).custom(customRuleCommonPassword).custom(customRuleStrongPassword).required(),
+    email: Joi.string().email({ tlds: false }).required().label('Email'),
+    username: Joi.string().alphanum().min(3).max(30).required().label('Username'),
+    password: Joi.string().min(8).custom(customRuleCommonPassword).custom(customRuleStrongPassword).required().label('Password'),
     repeat_password: Joi.ref("password"),
 }).with("password", "repeat_password");
 

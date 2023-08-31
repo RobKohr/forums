@@ -73,7 +73,7 @@ export default function FormContextProvider(props: FormContextProviderProps) {
   true && formDecorator; // hack to prevent unused variable error
 
   const form = {
-    data: formData,
+    data: formData(),
     set: setFormData,
     validationResult,
     touched,

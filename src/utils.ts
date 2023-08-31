@@ -18,3 +18,12 @@ export async function postData(apiPath: string, data: any,) {
     });
     return await response.json();
 }
+export function createServerErrors(response: any) {
+    console.log(response)
+    if (response.message !== "Validation failed" || !response?.data?.details?.length) {
+        return [response.message];
+    }
+    return response.data.details.map((detail: any) => {
+        return `${detail.message} `;
+    });
+}
