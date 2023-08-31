@@ -1,6 +1,6 @@
 import FormContextProvider from "../../components/forms/FormContextProvider/FormContextProvider";
 import InputText from "../../components/forms/InputText/InputText";
-import {} from "../../server/validation/auth.validation";
+import { registrationValidation } from "../../server/validation/auth.validation";
 
 function onSubmit(data: any) {
   console.log(data);
@@ -9,7 +9,7 @@ function onSubmit(data: any) {
 export default function Register() {
   const initialData = { username: "", password: "", repeat_password: "" };
   return (
-    <FormContextProvider initialData={initialData} validation={registrationSchema} postValidation={registrationPostValidation} onSubmit={onSubmit}>
+    <FormContextProvider initialData={initialData} validation={registrationValidation} onSubmit={onSubmit}>
       <InputText label="Username" name="username" type="text" />
       <InputText label="Email" name="email" type="email" />
       <InputText label="Password" name="password" type="password" />

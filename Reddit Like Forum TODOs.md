@@ -1,5 +1,7 @@
 https://thenounproject.com/icon/forum-3327115/ 
 
+https://answers.ea.com/t5/Games/ct-p/games-en
+
 Spam detection: https://www.explainxkcd.com/wiki/index.php/810:_Constructive
 
 Is this comment insightful or constructive? (yes/no)

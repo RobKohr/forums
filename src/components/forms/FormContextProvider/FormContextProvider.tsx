@@ -4,15 +4,6 @@ import type { Validator } from "../../../server/common/validation";
 
 export const FormContext = createContext<Form>();
 
-// export const FormContext = createContext<Form>({
-//   data: {},
-//   set: () => undefined,
-//   validationResult: () => undefined,
-//   touched: () => ({}),
-//   setFieldValue: () => undefined,
-//   inputChangeHandler: () => () => undefined,
-// });
-
 export interface Form {
   data: any;
   set: (data: any) => void;
@@ -26,7 +17,6 @@ export interface FormContextProviderProps {
   children: any;
   initialData: { [key: string]: any };
   validation?: Validator;
-  postValidation?: (validationResult: Joi.ValidationResult<any>) => Joi.ValidationResult<any>;
   onSubmit: (data: any) => void;
 }
 
@@ -35,10 +25,6 @@ interface FormData {
 }
 interface TouchedData {
   [key: string]: boolean;
-}
-
-function defaultPostValidation(validationResult: Joi.ValidationResult<any>) {
-  return validationResult;
 }
 
 declare module "solid-js" {
@@ -55,24 +41,28 @@ export default function FormContextProvider(props: FormContextProviderProps) {
   const initialTouchData: TouchedData = { test: true };
   const [touched, setTouched] = createSignal<TouchedData>(initialTouchData);
   const [validationResult, setValidationResult] = createSignal<Joi.ValidationResult<any> | undefined>();
-  const postValidation = props.postValidation || defaultPostValidation;
 
-  function validate(): boolean {
-    if (!props.validation) {
-      return true;
-    }
-    setValidationResult(props.validation(formData()));
-    if (validationResult()?.error) {
-      return false;
-    } else {
-      return true;
-    }
+  async function validate(): Promise<boolean> {
+    return new Promise(async function (resolve, _) {
+      resolve(true);
+      if (!props.validation) {
+        return true;
+      }
+      const localValidationResult = await props.validation(formData());
+      setValidationResult(localValidationResult);
+      if (validationResult()?.error) {
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
 
   function formDecorator(element: HTMLFormElement, _: () => any): void {
     element.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (validate()) {
+      const validationResult = await validate();
+      if (validationResult) {
         props.onSubmit(formData());
         console.log("validation passes");
       } else {
