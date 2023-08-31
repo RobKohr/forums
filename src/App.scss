@@ -106,3 +106,11 @@ a,
 .hidden {
   display: none;
 }
+
+.error-message {
+  border: 2px solid var(--errorMessageBorderColor);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  background: var(--errorMessageBackgroundColor);
+}

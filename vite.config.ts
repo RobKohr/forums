@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [solidPlugin(), solidSvg()],
   server: {
     port: 3000,
+    proxy: {
+      '/api': 'http://localhost:3001',
+    }
   },
   build: {
     target: 'esnext',

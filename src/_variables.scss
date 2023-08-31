@@ -57,15 +57,17 @@
 
     // color usage
 
-    --headerBg: #183444;
-    --headerHover: #0a171e; // #223844;
-    --secondaryHeaderBg: #e6eeff;
-    --fontColor: #333333;
-    --bodyBackground: #e9eff5;
-    --bannerColor: #cbddff;
-    --logoColor: white;
-    --appBackground: white;
-    --errorColor: red;
-    --floatingBoarderColor: #a6aecf;
+  --headerBg: #183444;
+  --headerHover: #0a171e; // #223844;
+  --secondaryHeaderBg: #e6eeff;
+  --fontColor: #333333;
+  --bodyBackground: #e9eff5;
+  --bannerColor: #cbddff;
+  --logoColor: white;
+  --appBackground: white;
+  --errorColor: red;
+  --floatingBoarderColor: #a6aecf;
+  --errorMessageBorderColor: var(--errorColor);
+  --errorMessageBackgroundColor: pink;
 }
   

@@ -47,11 +47,11 @@ const initServer = async () => {
     next();
   });
 
-  app.use("/auth", authRouter);
+  app.use("/api/auth", authRouter);
   app.listen(port);
 
   global.log(`Startup complete: http://localhost:${port}/docs`);
-  app.use("/docs", await TspecDocsMiddleware());
+  app.use("/api/docs", await TspecDocsMiddleware());
   global.log("ts spec updated");
 };
 initServer();

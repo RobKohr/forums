@@ -8,9 +8,7 @@
     "/auth/register": {
       "post": {
         "operationId": "RegisterApiSpec_post_/auth/register",
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Register a user",
         "parameters": [],
         "requestBody": {
@@ -29,17 +27,12 @@
                   "password": {
                     "type": "string"
                   },
-                  "retypePassword": {
+                  "repeat_password": {
                     "type": "string"
                   }
                 },
                 "additionalProperties": false,
-                "required": [
-                  "email",
-                  "password",
-                  "retypePassword",
-                  "username"
-                ]
+                "required": ["email", "password", "repeat_password", "username"]
               }
             }
           }
@@ -59,9 +52,7 @@
     "/auth/login": {
       "post": {
         "operationId": "LoginApiSpec_post_/auth/login",
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Login a user",
         "parameters": [],
         "requestBody": {
@@ -79,10 +70,7 @@
                   }
                 },
                 "additionalProperties": false,
-                "required": [
-                  "emailOrUsername",
-                  "password"
-                ]
+                "required": ["emailOrUsername", "password"]
               }
             }
           }
