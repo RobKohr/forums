@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
 import { Request, Response, Router } from "express";
 import { Tspec } from "tspec";
-import { trimBody, validate } from "../apiUtils";
+import { addSimulatedDelay, trimBody, validate } from "../apiUtils";
 import { knex, prettyError } from "../db";
 import { loginValidation, registrationValidation } from "../validation/auth.validation";
 const jwt = require('jsonwebtoken');
@@ -56,7 +56,7 @@ const register = async (req: Request, res: Response) => {
       res.json({ success: false, message: prettyError(error) });
     });
 };
-router.post("/register", trimBody, validate(registrationValidation), register);
+router.post("/register", addSimulatedDelay, trimBody, validate(registrationValidation), register);
 
 export type RegisterApiSpec = Tspec.DefineApiSpec<{
   tags: ["Auth"];

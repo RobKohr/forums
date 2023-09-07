@@ -5,10 +5,12 @@
   },
   "openapi": "3.0.3",
   "paths": {
-    "/auth/register": {
+    "/api/auth/register": {
       "post": {
-        "operationId": "RegisterApiSpec_post_/auth/register",
-        "tags": ["Auth"],
+        "operationId": "RegisterApiSpec_post_/api/auth/register",
+        "tags": [
+          "Auth"
+        ],
         "summary": "Register a user",
         "parameters": [],
         "requestBody": {
@@ -32,7 +34,12 @@
                   }
                 },
                 "additionalProperties": false,
-                "required": ["email", "password", "repeat_password", "username"]
+                "required": [
+                  "email",
+                  "password",
+                  "repeat_password",
+                  "username"
+                ]
               }
             }
           }
@@ -49,10 +56,12 @@
         }
       }
     },
-    "/auth/login": {
+    "/api/auth/login": {
       "post": {
-        "operationId": "LoginApiSpec_post_/auth/login",
-        "tags": ["Auth"],
+        "operationId": "LoginApiSpec_post_/api/auth/login",
+        "tags": [
+          "Auth"
+        ],
         "summary": "Login a user",
         "parameters": [],
         "requestBody": {
@@ -70,7 +79,10 @@
                   }
                 },
                 "additionalProperties": false,
-                "required": ["emailOrUsername", "password"]
+                "required": [
+                  "emailOrUsername",
+                  "password"
+                ]
               }
             }
           }

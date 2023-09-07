@@ -8,6 +8,10 @@ export function numberToArray(n: number) {
     return arr;
 }
 
+export function createId() {
+    return Math.random().toString(36).substring(2);
+}
+
 export async function postData(apiPath: string, data: any,) {
     const response = await fetch(apiBaseUrl + apiPath, {
         method: "POST",
@@ -27,3 +31,4 @@ export function createServerErrors(response: any) {
         return `${detail.message} `;
     });
 }
+

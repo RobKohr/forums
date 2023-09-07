@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import Joi from "joi";
 import { Validator } from "./common/validation";
 
 export function trimBody(req: Request, res: Response, next: NextFunction) {
@@ -11,6 +10,11 @@ export function trimBody(req: Request, res: Response, next: NextFunction) {
     next();
 }
 
+export function addSimulatedDelay(req: Request, res: Response, next: NextFunction) {
+    setTimeout(() => {
+        next();
+    }, 3000);
+}
 
 export function validate(validator: Validator) {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -27,3 +31,4 @@ export function validate(validator: Validator) {
         }
     };
 }
+

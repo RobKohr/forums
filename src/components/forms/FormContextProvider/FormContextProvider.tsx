@@ -37,10 +37,14 @@ declare module "solid-js" {
 
 // wrap children in provider
 export default function FormContextProvider(props: FormContextProviderProps) {
-  const [formData, setFormData] = createSignal<FormData>(props.initialData || {});
+  const [formData, setFormData] = createSignal<FormData>(
+    props.initialData || {}
+  );
   const initialTouchData: TouchedData = { test: true };
   const [touched, setTouched] = createSignal<TouchedData>(initialTouchData);
-  const [validationResult, setValidationResult] = createSignal<Joi.ValidationResult<any> | undefined>();
+  const [validationResult, setValidationResult] = createSignal<
+    Joi.ValidationResult<any> | undefined
+  >();
 
   async function validate(): Promise<boolean> {
     return new Promise(async function (resolve, _) {

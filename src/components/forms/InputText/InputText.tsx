@@ -4,11 +4,11 @@ import { useForm } from "../FormContextProvider/FormContextProvider";
 interface InputTextProps {
   label: string;
   name: string;
-  type: string;
+  type?: string;
 }
 
 export default function InputText(props: InputTextProps) {
-  const { label, name, type } = props;
+  const { label, name, type = "text" } = props;
   const form = useForm();
 
   if (form === undefined) {
@@ -34,7 +34,14 @@ export default function InputText(props: InputTextProps) {
 
   return (
     <div>
-      <input type={type} name={name} id={name} placeholder={label} value={form.data[name] || ""} onInput={form.inputChangeHandler(name)} />
+      <input
+        type={type}
+        name={name}
+        id={name}
+        placeholder={label}
+        value={form.data[name] || ""}
+        onInput={form.inputChangeHandler(name)}
+      />
       <div class="error">{form.touched()?.[name] && error()}&nbsp;</div>
     </div>
   );
