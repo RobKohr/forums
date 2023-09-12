@@ -11,8 +11,6 @@ export default function Register() {
   const [serverError, setServerError] = createSignal<string[] | undefined>();
   const navigate = useNavigate();
   async function onSubmit(data: any) {
-    // when user submits the form, the form becomes faded and a spinner appears
-    // the spinner disappears when the server responds
     setLoadingState(true);
     const response = await postData("auth/register", data);
     setLoadingState(false);
@@ -27,6 +25,18 @@ export default function Register() {
       );
     }
     console.log(response);
+  }
+  async function handleSubmission(data: any, apiUrl: string) {
+    setLoadingState(true);
+    const response = await postData(apiUrl, data);
+    setLoadingState(false);
+    if (response.success === false) {
+      setServerError(createServerErrors(response));
+      return false;
+    } else {
+      setServerError(undefined);
+      return true;
+    }
   }
   const initialData = {
     email: "testfish@gmail.com",
