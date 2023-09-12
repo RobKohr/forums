@@ -50,7 +50,7 @@ const initServer = async () => {
   app.use("/api/auth", authRouter);
   app.listen(port);
 
-  global.log(`Startup complete: http://localhost:${port}/docs`);
+  global.log(`Startup complete: http://localhost:${port}/api/docs`);
   app.use("/api/docs", await TspecDocsMiddleware());
   global.log("ts spec updated");
 };

@@ -98,6 +98,72 @@
           }
         }
       }
+    },
+    "/api/auth/validateToken": {
+      "post": {
+        "operationId": "ValidateTokenPostApiSpec_post_/api/auth/validateToken",
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Validate a token",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "ValidateTokenGetApiSpec_get_/api/auth/validateToken",
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Validate a token",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

@@ -12,23 +12,4 @@ export function createId() {
     return Math.random().toString(36).substring(2);
 }
 
-export async function postData(apiPath: string, data: any,) {
-    const response = await fetch(apiBaseUrl + apiPath, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return await response.json();
-}
-export function createServerErrors(response: any) {
-    console.log(response)
-    if (response.message !== "Validation failed" || !response?.data?.details?.length) {
-        return [response.message];
-    }
-    return response.data.details.map((detail: any) => {
-        return `${detail.message} `;
-    });
-}
 

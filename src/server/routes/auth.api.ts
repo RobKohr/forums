@@ -2,9 +2,9 @@ import "dotenv/config";
 
 import bcrypt from "bcrypt";
 import bodyParser from "body-parser";
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { Tspec } from "tspec";
-import { addSimulatedDelay, trimBody, validate } from "../apiUtils";
+import { trimBody, validate } from "../apiUtils";
 import { knex, prettyError } from "../db";
 import { loginValidation, registrationValidation } from "../validation/auth.validation";
 const jwt = require('jsonwebtoken');
@@ -56,7 +56,7 @@ const register = async (req: Request, res: Response) => {
       res.json({ success: false, message: prettyError(error) });
     });
 };
-router.post("/register", addSimulatedDelay, trimBody, validate(registrationValidation), register);
+router.post("/register", trimBody, validate(registrationValidation), register);
 
 export type RegisterApiSpec = Tspec.DefineApiSpec<{
   tags: ["Auth"];
@@ -108,9 +108,6 @@ const login = async (req: Request, res: Response) => {
   const { username, email, display_name, user_id } = result;
 
   const passwordMatch = bcrypt.compareSync(password, result.password);
-  /* add jwt token */
-
-
   if (!passwordMatch) {
     res.json({ success: false, message: "Invalid login" });
     return;
@@ -134,6 +131,62 @@ export type LoginApiSpec = Tspec.DefineApiSpec<{
           password: string;
         };
         handler: typeof login;
+      };
+    };
+  };
+}>;
+
+interface ValidateTokenRequest extends Request {
+  username?: string;
+}
+
+async function validateToken(req: ValidateTokenRequest, res: Response, next: NextFunction): Promise<void> {
+  const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if (token == null) {
+    res.sendStatus(401);
+    return;
+  }
+  jwt.verify(token, process.env.TOKEN_SECRET, (err: any, username: any) => {
+    if (err) { return res.sendStatus(403); }
+    req.username = username;
+    next();
+  })
+
+}
+
+router.post("/validateToken", validateToken, (req: ValidateTokenRequest, res: Response) => {
+  res.json({ success: true, message: "Token is valid", username: req.username });
+});
+router.get("/validateToken", validateToken, (req: ValidateTokenRequest, res: Response) => {
+  res.json({ success: true, message: "Token is valid", username: req.username });
+});
+
+export type ValidateTokenPostApiSpec = Tspec.DefineApiSpec<{
+  tags: ["Auth"];
+  paths: {
+    "/api/auth/validateToken": {
+      post: {
+        summary: "Validate a token";
+        handler: typeof validateToken;
+        body: {
+          token: string;
+        }
+      };
+    };
+  };
+}>;
+
+
+export type ValidateTokenGetApiSpec = Tspec.DefineApiSpec<{
+  tags: ["Auth"],
+  paths: {
+    "/api/auth/validateToken": {
+      get: {
+        summary: "Validate a token",
+        handler: typeof validateToken,
+        query: {
+          token: string,
+        },
       };
     };
   };

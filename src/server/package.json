@@ -37,6 +37,6 @@
     "postgres": "^3.3.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "tspec": "^0.1.103"
+    "tspec": "^0.1.108"
   }
 }
