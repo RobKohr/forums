@@ -1,6 +1,7 @@
 import fs from "fs";
 import Joi from "joi";
 import { createValidation } from "../common/validation";
+import { localization } from "../common/localization";
 
 let isOnServer = false;
 let customRuleCommonPassword = (value: string) => {
@@ -36,21 +37,30 @@ function customRuleStrongPassword(value: string) {
     if (passwordStrength(String(value)) > 1e16) {
         return value;
     } else {
-        throw new Error("Add more letters, numbers, and symbols to make a stronger password.");
+        throw new Error(localization('strongerPassword'));
+    }
+}
+
+function customRuleUsername(value: string) {
+    // allow only letters, numbers, underscores, and dashes
+    if (/^[a-zA-Z0-9_-]+$/.test(value)) {
+        return value;
+    } else {
+        throw new Error("Username can only contain letters, numbers, underscores, and dashes.");
     }
 }
 
 const registrationSchema = Joi.object({
     email: Joi.string().email({ tlds: false }).required().label('Email'),
-    username: Joi.string().alphanum().min(3).max(30).required().label('Username'),
+    username: Joi.string().custom(customRuleUsername).min(3).max(30).required().label('Username'),
     password: Joi.string().min(8).custom(customRuleCommonPassword).custom(customRuleStrongPassword).required().label('Password'),
-    repeat_password: Joi.ref("password"),
-}).with("password", "repeat_password");
+    retype_password: Joi.ref("password"),
+}).with("password", "retype_password");
 
 function registrationPostValidation(validationResult: Joi.ValidationResult) {
     if (validationResult.error?.details?.length) {
         validationResult.error.details.forEach((error) => {
-            if (error.context?.key === "repeat_password") {
+            if (error.context?.key === "retype_password") {
                 error.message = "Passwords do not match";
             }
             if (error.message.includes('failed custom validation because ')) {

@@ -16,7 +16,6 @@ function toggleSearch() {
     setBelowHeader("");
   }
 }
-
 export default function Header() {
   const location = useLocation();
   const isRouting = useIsRouting();

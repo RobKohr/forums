@@ -4,7 +4,13 @@ import "./AccountImage.scss";
 export default function AccountImage() {
   return (
     <div class="account-image-component">
-      <UserIcon class="user-icon clickable" onClick={() => setMenuModalActive((value) => (value === "account" ? "" : "account"))} />
+      <UserIcon
+        class="user-icon clickable"
+        data-testid="toggle-account-menu"
+        onClick={() =>
+          setMenuModalActive((value) => (value === "account" ? "" : "account"))
+        }
+      />
     </div>
   );
 }

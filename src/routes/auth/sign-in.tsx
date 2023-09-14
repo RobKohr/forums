@@ -37,6 +37,7 @@ export default function SignIn() {
       initialData={initialData}
       validation={loginValidation}
       onSubmit={onSubmit}
+      id="sign-in-form"
     >
       <ServerErrors serverErrors={serverErrors()} />
       <InputText label="Username" name="emailOrUsername" type="text" />

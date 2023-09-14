@@ -18,9 +18,9 @@ router.use(bodyParser.json());
 
 /* Begin Register */
 const register = async (req: Request, res: Response) => {
-  const { email, username, password, repeat_password } = req.body;
-  if (password !== repeat_password) {
-    res.json({ success: false, message: `Passwords do not match ${password} ${repeat_password}` });
+  const { email, username, password, retype_password } = req.body;
+  if (password !== retype_password) {
+    res.json({ success: false, message: `Passwords do not match ${password} ${retype_password}` });
     return;
   }
 
@@ -68,7 +68,7 @@ export type RegisterApiSpec = Tspec.DefineApiSpec<{
           username: string;
           email: string;
           password: string;
-          repeat_password: string;
+          retype_password: string;
         };
         handler: typeof register;
       };

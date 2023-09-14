@@ -1,14 +1,21 @@
-import { createEffect, createSignal } from "solid-js";
+import { createEffect, createSignal, JSX, splitProps } from "solid-js";
 import { useForm } from "../FormContextProvider/FormContextProvider";
 
-interface InputTextProps {
+interface InputTextProps extends JSX.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
-  type?: string;
+  type: string;
+  "data-testid"?: string;
 }
 
 export default function InputText(props: InputTextProps) {
-  const { label, name, type = "text" } = props;
+  const [local, htmlProps] = splitProps(props, [
+    "label",
+    "name",
+    "type",
+    "data-testid",
+  ]);
+  const { name } = local;
   const form = useForm();
 
   if (form === undefined) {
@@ -31,16 +38,19 @@ export default function InputText(props: InputTextProps) {
       setError(updatedError);
     }
   });
-
+  const id = form.id + "-" + name;
+  const dataTestId = local["data-testid"] || id;
   return (
     <div>
       <input
-        type={type}
+        type={local.type}
         name={name}
-        id={name}
-        placeholder={label}
-        value={form.data[name] || ""}
+        id={id}
+        placeholder={local.label}
+        value={form.data[local.name] || ""}
         onInput={form.inputChangeHandler(name)}
+        data-testid={dataTestId}
+        {...htmlProps}
       />
       <div class="error">{form.touched()?.[name] && error()}&nbsp;</div>
     </div>

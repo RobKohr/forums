@@ -29,7 +29,7 @@
                   "password": {
                     "type": "string"
                   },
-                  "repeat_password": {
+                  "retype_password": {
                     "type": "string"
                   }
                 },
@@ -37,7 +37,7 @@
                 "required": [
                   "email",
                   "password",
-                  "repeat_password",
+                  "retype_password",
                   "username"
                 ]
               }

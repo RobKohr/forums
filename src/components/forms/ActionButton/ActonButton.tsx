@@ -1,8 +1,16 @@
+import { JSX, splitProps } from "solid-js";
 import "./ActionButton.scss";
-export default function ActionButton(props: { children: any; onClick: () => void }) {
+
+interface ActionButtonProps
+  extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: any;
+}
+
+export default function ActionButton(props: ActionButtonProps) {
+  const [local, htmlProps] = splitProps(props, ["children"]);
   return (
-    <button class="action-button" onClick={props.onClick}>
-      {props.children}
+    <button class="action-button" {...htmlProps}>
+      {local.children}
     </button>
   );
 }

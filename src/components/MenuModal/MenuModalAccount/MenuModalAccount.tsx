@@ -7,6 +7,7 @@ export default function MenuModalAccount() {
   return (
     <>
       <ActionButton
+        data-testid="header-sub-sign-up"
         onClick={() => {
           setMenuModalActive("signup");
         }}
@@ -14,6 +15,7 @@ export default function MenuModalAccount() {
         Sign up
       </ActionButton>
       <ActionButton
+        data-testid="header-sub-sign-in"
         onClick={() => {
           setMenuModalActive("signin");
         }}

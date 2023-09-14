@@ -19,6 +19,6 @@
     "titleBar.inactiveForeground": "#15202b99"
   },
   "peacock.color": "#f0db99",
-  "cSpell.words": ["tlds"],
+  "cSpell.words": ["nocheck", "testid", "tlds"],
   "prettier.printWidth": 80
 }

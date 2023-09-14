@@ -11,6 +11,7 @@ export interface Form {
   touched: Accessor<TouchedData>;
   setFieldValue: (field: string, value: string) => void;
   inputChangeHandler: (name: string) => (e: Event) => void;
+  id: string;
 }
 
 export interface FormContextProviderProps {
@@ -18,6 +19,7 @@ export interface FormContextProviderProps {
   initialData: { [key: string]: any };
   validation?: Validator;
   onSubmit: (data: any) => void;
+  id: string;
 }
 
 interface FormData {
@@ -78,6 +80,7 @@ export default function FormContextProvider(props: FormContextProviderProps) {
 
   const form = {
     data: formData(),
+    id: props.id,
     set: setFormData,
     validationResult,
     touched,
@@ -94,7 +97,9 @@ export default function FormContextProvider(props: FormContextProviderProps) {
   validate();
   return (
     <FormContext.Provider value={form}>
-      <form use:formDecorator>{props.children}</form>
+      <form id={`form-${props.id}`} use:formDecorator>
+        {props.children}
+      </form>
     </FormContext.Provider>
   );
 }
