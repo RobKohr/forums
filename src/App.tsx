@@ -7,13 +7,12 @@ import Footer from "./components/Footer/Footer";
 import Header, { belowHeader } from "./components/Header/Header";
 import Loading from "./components/Loading/Loading";
 import { MenuModal } from "./components/MenuModal/MenuModal";
-import Notifications, {
-  createNotification,
-} from "./components/Notifications/Notifications";
+import Notifications from "./components/Notifications/Notifications";
+import { setAuthUserTokenFromCookie } from "./components/authUserToken";
 import Home from "./routes";
 import About from "./routes/about";
+import SignIn from "./routes/auth/login";
 import Register from "./routes/auth/register";
-import SignIn from "./routes/auth/sign-in";
 import Test from "./routes/test";
 export interface AppRoute {
   path: string;
@@ -24,8 +23,8 @@ export interface AppRoute {
 const routes: AppRoute[] = [
   { path: "/", component: Home },
   { path: "/about", component: About },
-  { path: "/auth/sign-in", component: SignIn },
-  { path: "/auth/sign-up", component: Register },
+  { path: "/auth/login", component: SignIn },
+  { path: "/auth/register", component: Register },
   { path: "/test", component: Test },
 ];
 
@@ -36,23 +35,13 @@ routes.forEach((route) => {
   }
 });
 
-// function urlEncode(str: string) {
-//   return encodeURIComponent(str).replace(/%20/g, "+");
-// }
-
 function NotFound() {
   return <div>Page Not Found</div>;
 }
 
-// export function signIn() {
-//   console.log("sign in");
-//   const path = window.location.href.split("?")[0];
-//   window.location.href = `/sign-in?returnTo=${urlEncode(path || "/")}`;
-// }
-
 // const VITE_VARIABLE_NAME = import.meta.env["VITE_VARIABLE_NAME"];
 const App: Component = () => {
-  createNotification({ message: "Hello World", type: "info" });
+  setAuthUserTokenFromCookie();
   return (
     <div id="app">
       <Loading />

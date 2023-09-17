@@ -5,9 +5,10 @@ import {
   ServerErrors,
   handleSubmission,
 } from "../../components/ApiUtils/ApiUtils";
+import FormContextProvider from "../../components/Forums/FormContextProvider/FormContextProvider";
+import InputSubmit from "../../components/Forums/InputSubmit/InputSubmit";
+import InputText from "../../components/Forums/InputText/InputText";
 import { closeMenuModal } from "../../components/MenuModal/MenuModalState";
-import FormContextProvider from "../../components/forms/FormContextProvider/FormContextProvider";
-import InputText from "../../components/forms/InputText/InputText";
 import { registrationValidation } from "../../server/validation/auth.validation";
 
 export default function Register() {
@@ -30,9 +31,7 @@ export default function Register() {
     if (success) {
       const loginMessage = "Registration successful. Please login.";
       closeMenuModal();
-      navigate(
-        "/auth/sign-in?notification=" + encodeURIComponent(loginMessage)
-      );
+      navigate("/auth/login?notification=" + encodeURIComponent(loginMessage));
     }
   }
   const id = "register-form";
@@ -52,8 +51,7 @@ export default function Register() {
         name="retype_password"
         type="password"
       />
-      <InputSubmit label="Register" />
-      <input type="submit" value="Register" data-test-id={`${id}-submit`} />
+      <InputSubmit value="Register" />
     </FormContextProvider>
   );
 }

@@ -1,5 +1,5 @@
 {
-  "specPathGlobs": ["routes/**/**/*.ts"],
+  "specPathGlobs": ["apiRoutes/**/**/*.ts"],
   "tsconfigPath": "./tsconfig.json",
   "outputPath": "./openapi.json",
   "specVersion": 3,

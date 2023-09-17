@@ -1,6 +1,6 @@
 import { useNavigate } from "@solidjs/router";
-import FormContextProvider from "../forms/FormContextProvider/FormContextProvider";
-import InputText from "../forms/InputText/InputText";
+import FormContextProvider from "../Forums/FormContextProvider/FormContextProvider";
+import InputText from "../Forums/InputText/InputText";
 import "./Search.scss";
 
 interface SearchData {

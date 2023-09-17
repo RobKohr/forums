@@ -16,7 +16,7 @@ export interface NotificationMessages {
 }
 const notificationMessages: NotificationMessages = {
   atSignIn: "You have been signed in.",
-  atSignUp: "You have been signed up.",
+  atLogin: "You have been signed up.",
 };
 
 const [notifications, setNotifications] = createSignal<Notification[]>([]);

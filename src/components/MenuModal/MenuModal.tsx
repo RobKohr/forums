@@ -1,7 +1,6 @@
-import { useNavigate } from "@solidjs/router";
 import { Show } from "solid-js";
+import SignIn from "../../routes/auth/login";
 import Register from "../../routes/auth/register";
-import SignIn from "../../routes/auth/sign-in";
 import "./MenuModal.scss";
 import MenuModalAccount from "./MenuModalAccount/MenuModalAccount";
 import { menuModalActive, setMenuModalActive } from "./MenuModalState";
@@ -21,7 +20,7 @@ export function MenuModal() {
         <Show when={menuModalActive() === "account"}>
           <MenuModalAccount />
         </Show>
-        <Show when={menuModalActive() === "signup"}>
+        <Show when={menuModalActive() === "login"}>
           <Register />
         </Show>
         <Show when={menuModalActive() === "signin"}>

@@ -21,7 +21,7 @@ export async function handleSubmission({
     return false;
   } else {
     setServerErrors(undefined);
-    return true;
+    return response;
   }
 }
 

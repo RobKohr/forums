@@ -1,5 +1,5 @@
 import { useNavigate } from "@solidjs/router";
-import ActionButton from "../../forms/ActionButton/ActonButton";
+import ActionButton from "../../Forums/ActionButton/ActonButton";
 import { setMenuModalActive } from "../MenuModalState";
 
 export default function MenuModalAccount() {
@@ -7,20 +7,20 @@ export default function MenuModalAccount() {
   return (
     <>
       <ActionButton
-        data-testid="header-sub-sign-up"
+        data-testid="header-sub-register"
         onClick={() => {
-          setMenuModalActive("signup");
+          setMenuModalActive("login");
         }}
       >
-        Sign up
+        Register
       </ActionButton>
       <ActionButton
-        data-testid="header-sub-sign-in"
+        data-testid="header-sub-login"
         onClick={() => {
           setMenuModalActive("signin");
         }}
       >
-        Sign in
+        Login
       </ActionButton>
     </>
   );

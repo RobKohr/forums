@@ -5,27 +5,30 @@ import {
   ServerErrors,
   handleSubmission,
 } from "../../components/ApiUtils/ApiUtils";
+import FormContextProvider from "../../components/Forums/FormContextProvider/FormContextProvider";
+import InputSubmit from "../../components/Forums/InputSubmit/InputSubmit";
+import InputText from "../../components/Forums/InputText/InputText";
 import { closeMenuModal } from "../../components/MenuModal/MenuModalState";
-import FormContextProvider from "../../components/forms/FormContextProvider/FormContextProvider";
-import InputText from "../../components/forms/InputText/InputText";
+import { saveAuthUserToken } from "../../components/authUserToken";
 import { loginValidation } from "../../server/validation/auth.validation";
 
 export default function SignIn() {
   const navigate = useNavigate();
   const [serverErrors, setServerErrors] = createSignal<string[] | undefined>();
-  const apiPath = "auth/sign-in";
+  const apiPath = "auth/login";
   const initialData = {
-    username: "",
+    emailOrUsername: "",
     password: "",
   };
 
   async function onSubmit(data: any) {
-    const success = await handleSubmission({
+    const response = await handleSubmission({
       data,
       apiPath,
       setServerErrors,
     });
-    if (success) {
+    if (response?.success === true && response.token) {
+      saveAuthUserToken(response.token);
       const loginMessage = "User logged in successfully.";
       closeMenuModal();
       navigate("/?notification=" + encodeURIComponent(loginMessage));
@@ -37,12 +40,12 @@ export default function SignIn() {
       initialData={initialData}
       validation={loginValidation}
       onSubmit={onSubmit}
-      id="sign-in-form"
+      id="login-form"
     >
       <ServerErrors serverErrors={serverErrors()} />
       <InputText label="Username" name="emailOrUsername" type="text" />
       <InputText label="Password" name="password" type="password" />
-      <input type="submit" value="Login" />
+      <InputSubmit value="Login" />
     </FormContextProvider>
   );
 }

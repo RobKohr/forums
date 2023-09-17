@@ -1,4 +1,3 @@
-import { apiBaseUrl } from "./config";
 
 export function numberToArray(n: number) {
     const arr: number[] = [];
@@ -13,3 +12,6 @@ export function createId() {
 }
 
 
+export function toId(str: string) {
+    return str.replace(/[^a-zA-Z0-9-]/g, "-").toLowerCase();
+}

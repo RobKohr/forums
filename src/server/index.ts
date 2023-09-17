@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 
 const port = process.env["API_PORT"] || 9999;
 
-import { router as authRouter } from "./routes/auth.api";
+import { router as authRouter } from "./apiRoutes/auth.api";
 const initServer = async () => {
   const app = express();
   /* output every api request's path and method to the console, if that file isn't a static file*/

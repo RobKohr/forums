@@ -4,6 +4,7 @@ import AccountImage from "../AccountImage/AccountImage";
 import Logo from "../Logo";
 import NeverallAppsMenu from "../NeverallAppsMenu/NeverallAppsMenu";
 import Search from "../Search/Search";
+import { authUserToken } from "../authUserToken";
 import "./Header.scss";
 
 export const [belowHeader, setBelowHeader] = createSignal<string>("");
@@ -35,8 +36,9 @@ export default function Header() {
       </div>
       <div class="header-sub">
         <span onClick={toggleSearch}>Search</span>
-        <A href="auth/sign-in?notification=atSignIn">Sign In</A>{" "}
-        <A href="auth/sign-up?notification=atSignUp">Sign Up</A>
+        <A href="auth/login?notification=atSignIn">Login</A>{" "}
+        <A href="auth/register?notification=atLogin">Register</A>
+        <span>Auth user token = {authUserToken()}</span>
       </div>
       <div class="header-sub">
         <NeverallAppsMenu />

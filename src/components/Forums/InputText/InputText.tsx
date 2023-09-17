@@ -1,4 +1,5 @@
 import { createEffect, createSignal, JSX, splitProps } from "solid-js";
+import { toId } from "../../../utils";
 import { useForm } from "../FormContextProvider/FormContextProvider";
 
 interface InputTextProps extends JSX.InputHTMLAttributes<HTMLInputElement> {
@@ -17,11 +18,9 @@ export default function InputText(props: InputTextProps) {
   ]);
   const { name } = local;
   const form = useForm();
-
   if (form === undefined) {
     return <div>FormContextProvider not found</div>;
   }
-
   const [error, setError] = createSignal("");
 
   createEffect(() => {
@@ -38,7 +37,7 @@ export default function InputText(props: InputTextProps) {
       setError(updatedError);
     }
   });
-  const id = form.id + "-" + name;
+  const id = toId(form.id + "-" + name);
   const dataTestId = local["data-testid"] || id;
   return (
     <div>
