@@ -6,7 +6,7 @@ export default function MenuModalAccount() {
   const navigate = useNavigate();
   return (
     <>
-      <ActionButton
+      {/* <ActionButton
         data-testid="header-sub-register"
         onClick={() => {
           setMenuModalActive("login");
@@ -21,6 +21,15 @@ export default function MenuModalAccount() {
         }}
       >
         Login
+      </ActionButton> */}
+      <ActionButton
+        data-testid="header-sub-navigate-to-logout"
+        onClick={() => {
+          navigate("/auth/logout");
+          setMenuModalActive("");
+        }}
+      >
+        Logout
       </ActionButton>
     </>
   );

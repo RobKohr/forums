@@ -28,3 +28,8 @@ export function getTokenData() {
     console.log("decoded", decoded);
     return decoded;
 }
+
+export function logout() {
+    Cookies.remove("authUserToken");
+    setAuthUserToken("");
+}

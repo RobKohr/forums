@@ -1,6 +1,7 @@
-import { A, useIsRouting, useLocation } from "@solidjs/router";
+import { useIsRouting, useLocation, useNavigate } from "@solidjs/router";
 import { Show, createEffect, createSignal } from "solid-js";
 import AccountImage from "../AccountImage/AccountImage";
+import ActionButton from "../Forums/ActionButton/ActonButton";
 import Logo from "../Logo";
 import NeverallAppsMenu from "../NeverallAppsMenu/NeverallAppsMenu";
 import Search from "../Search/Search";
@@ -18,9 +19,11 @@ function toggleSearch() {
   }
 }
 export default function Header() {
+  const navigate = useNavigate();
   const location = useLocation();
   const isRouting = useIsRouting();
   createEffect(() => {
+    console.log("routing", isRouting());
     if (isRouting()) {
       setBelowHeader("");
     }
@@ -28,7 +31,6 @@ export default function Header() {
       setBelowHeader("search");
     }
   });
-
   return (
     <div id="header">
       <div class="header-sub">
@@ -36,13 +38,30 @@ export default function Header() {
       </div>
       <div class="header-sub">
         <span onClick={toggleSearch}>Search</span>
-        <A href="auth/login?notification=atSignIn">Login</A>{" "}
-        <A href="auth/register?notification=atLogin">Register</A>
-        <span>Auth user token = {authUserToken()}</span>
       </div>
       <div class="header-sub">
         <NeverallAppsMenu />
-        <AccountImage />
+        <Show when={!authUserToken()}>
+          <ActionButton
+            data-testid="action-button-navigate-to-login"
+            onClick={() => {
+              navigate("/auth/login");
+            }}
+          >
+            Login
+          </ActionButton>
+          <ActionButton
+            data-testid="action-button-navigate-to-register"
+            onClick={() => {
+              navigate("/auth/register");
+            }}
+          >
+            Register
+          </ActionButton>
+        </Show>
+        <Show when={authUserToken()}>
+          <AccountImage />
+        </Show>
       </div>
       <Show when={belowHeader()}>
         <div class="header-sub below hidden">
