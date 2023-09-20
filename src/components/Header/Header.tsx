@@ -2,7 +2,7 @@ import { useIsRouting, useLocation, useNavigate } from "@solidjs/router";
 import { Show, createEffect, createSignal } from "solid-js";
 import AccountImage from "../AccountImage/AccountImage";
 import ActionButton from "../Forums/ActionButton/ActonButton";
-import Logo from "../Logo";
+import Logo from "../Logo/Logo";
 import NeverallAppsMenu from "../NeverallAppsMenu/NeverallAppsMenu";
 import Search from "../Search/Search";
 import { authUserToken } from "../authUserToken";

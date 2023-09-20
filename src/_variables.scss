@@ -5,7 +5,7 @@
     --belowHeaderHeight: 5rem;
     --mobileWidth: 400px;
     --logoContainerWidth: 60px;
-
+    --maxContentWidth:1400px;
 
     // color palette
 
@@ -69,5 +69,7 @@
   --floatingBoarderColor: #a6aecf;
   --errorMessageBorderColor: var(--errorColor);
   --errorMessageBackgroundColor: pink;
+
+
 }
   

@@ -10,6 +10,7 @@ import { MenuModal } from "./components/MenuModal/MenuModal";
 import Notifications from "./components/Notifications/Notifications";
 import { setAuthUserTokenFromCookie } from "./components/authUserToken";
 import Home from "./routes";
+import Browse from "./routes/browse";
 import About from "./routes/about";
 import SignIn from "./routes/auth/login";
 import Logout from "./routes/auth/logout";
@@ -22,7 +23,7 @@ export interface AppRoute {
 }
 
 const routes: AppRoute[] = [
-  { path: "/", component: Home },
+  { path: "/", component: Browse },
   { path: "/about", component: About },
   { path: "/auth/login", component: SignIn },
   { path: "/auth/register", component: Register },
