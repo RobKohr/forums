@@ -9,7 +9,8 @@
     "server": "npx tspec generate --outputPath openapi.json --specPathGlobs ../routes/**/*.ts ; npx nodemon --trace-warnings",
     "without": "npx tspec generate --outputPath openapi.json --specPathGlobs ../routes/**/*.ts ; npx nodemon --trace-warnings",
     "build": "rimraf ./build && tsc",
-    "start:prod": "npm run build && node build/index.js"
+    "start:prod": "npm run build && node build/index.js",
+    "import-godot": "npx nodemon --trace-warnings --exec \"npx ts-node ./scripts/import-from-godot-asset-store.ts\""
   },
   "author": "",
   "license": "ISC",
