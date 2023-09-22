@@ -1,0 +1,44 @@
+.input-text-component {
+  margin-top: 0.625rem;
+  position: relative;
+  input {
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: white;
+    color: rgb(38 57 31);
+
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.25rem;
+    min-height: 3rem;
+    padding: 0 0.75rem;
+    width: 100%;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    &.error {
+      border-color: rgb(248 113 113);
+      padding: 0 2.8125rem 0 0.75rem;
+    }
+  }
+  .placeholder {
+    color: rgb(114 125 109);
+    left: 1rem;
+    pointer-events: none;
+    position: absolute;
+    top: 0.875rem;
+    transition: all 0.15s ease;
+    &.focused {
+      background-color: white;
+      display: block;
+      font-size: 0.75rem;
+      height: 0.4rem;
+      left: 0.5rem;
+      line-height: 0.35rem;
+      padding-right: 0.25rem;
+      padding-left: 0.25rem;
+      position: absolute;
+      top: -0.15rem;
+      transition: all 0.15s ease;
+      z-index: 2;
+    }
+  }
+}

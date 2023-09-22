@@ -36,22 +36,24 @@ export default function Register() {
   }
   const id = "register-form";
   return (
-    <FormContextProvider
-      initialData={initialData}
-      validation={registrationValidation}
-      onSubmit={onSubmit}
-      id={id}
-    >
-      <ServerErrors serverErrors={serverErrors()} />
-      <InputText label="Username" name="username" type="text" />
-      <InputText label="Email" name="email" type="email" />
-      <InputText label="Password" name="password" type="password" />
-      <InputText
-        label="Retype Password"
-        name="retype_password"
-        type="password"
-      />
-      <InputSubmit value="Register" />
-    </FormContextProvider>
+    <div class="narrow-content page-auth-register">
+      <FormContextProvider
+        initialData={initialData}
+        validation={registrationValidation}
+        onSubmit={onSubmit}
+        id={id}
+      >
+        <ServerErrors serverErrors={serverErrors()} />
+        <InputText label="Username" name="username" type="text" />
+        <InputText label="Email" name="email" type="email" />
+        <InputText label="Password" name="password" type="password" />
+        <InputText
+          label="Retype Password"
+          name="retype_password"
+          type="password"
+        />
+        <InputSubmit value="Register" />
+      </FormContextProvider>
+    </div>
   );
 }

@@ -36,16 +36,18 @@ export default function SignIn() {
   }
 
   return (
-    <FormContextProvider
-      initialData={initialData}
-      validation={loginValidation}
-      onSubmit={onSubmit}
-      id="login-form"
-    >
-      <ServerErrors serverErrors={serverErrors()} />
-      <InputText label="Username" name="emailOrUsername" type="text" />
-      <InputText label="Password" name="password" type="password" />
-      <InputSubmit value="Login" />
-    </FormContextProvider>
+    <div class="narrow-content page-auth-login">
+      <FormContextProvider
+        initialData={initialData}
+        validation={loginValidation}
+        onSubmit={onSubmit}
+        id="login-form"
+      >
+        <ServerErrors serverErrors={serverErrors()} />
+        <InputText label="Username" name="emailOrUsername" type="text" />
+        <InputText label="Password" name="password" type="password" />
+        <InputSubmit value="Login" />
+      </FormContextProvider>
+    </div>
   );
 }

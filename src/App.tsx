@@ -9,27 +9,38 @@ import Loading from "./components/Loading/Loading";
 import { MenuModal } from "./components/MenuModal/MenuModal";
 import Notifications from "./components/Notifications/Notifications";
 import { setAuthUserTokenFromCookie } from "./components/authUserToken";
-import Home from "./routes";
-import Browse from "./routes/browse";
-import About from "./routes/about";
-import SignIn from "./routes/auth/login";
-import Logout from "./routes/auth/logout";
-import Register from "./routes/auth/register";
-import Test from "./routes/test";
+
+import Browse from "./pages/_sites/asset-store/browse";
+import SignIn from "./pages/auth/login";
+import Logout from "./pages/auth/logout";
+import Register from "./pages/auth/register";
+import Test from "./pages/test";
 export interface AppRoute {
   path: string;
   component: Component;
   label?: string;
 }
 
-const routes: AppRoute[] = [
-  { path: "/", component: Browse },
-  { path: "/about", component: About },
+const site: string = "asset-store";
+
+export interface SiteRoutes {
+  [site: string]: AppRoute[];
+}
+
+const siteRoutes: SiteRoutes = {};
+
+siteRoutes["common"] = [
   { path: "/auth/login", component: SignIn },
   { path: "/auth/register", component: Register },
   { path: "/auth/logout", component: Logout },
+];
+
+siteRoutes["asset-store"] = [
+  { path: "/", component: Browse },
   { path: "/test", component: Test },
 ];
+
+const routes: AppRoute[] = [...siteRoutes[site], ...siteRoutes["common"]];
 
 routes.forEach((route) => {
   route.label = capitalize(route.path.replace("/", ""));

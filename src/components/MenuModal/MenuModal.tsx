@@ -1,6 +1,6 @@
 import { Show } from "solid-js";
-import SignIn from "../../routes/auth/login";
-import Register from "../../routes/auth/register";
+import SignIn from "../../pages/auth/login";
+import Register from "../../pages/auth/register";
 import "./MenuModal.scss";
 import MenuModalAccount from "./MenuModalAccount/MenuModalAccount";
 import { menuModalActive, setMenuModalActive } from "./MenuModalState";
