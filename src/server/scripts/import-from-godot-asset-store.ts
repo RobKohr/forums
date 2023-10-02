@@ -1,5 +1,5 @@
 import { knex } from "../db";
-
+import * as $ from cheerio;
 const assetUrlBase = "https://godotengine.org/asset-library/asset/";
 console.log(assetUrlBase);
 interface Asset {
@@ -7,6 +7,8 @@ interface Asset {
   data: string;
 }
 
+
+const maxId = 1
 
 
 
