@@ -1,0 +1,37 @@
+{
+  "importDetails": {
+    "title": "Minilens",
+    "shortDescription": "1000 years after post-apocalyptic Earth, many form of lifes went extinct, including humans. An alien robot series, called Minilens, are cleaning up earth and collecting surviving flora. The game is won by destroying all Radioactive Barrels and collecting surviving flora. The drawback is that Minilens can't jump.",
+    "media": [],
+    "source": "https://github.com/KOBUGE-Games/minilens",
+    "download": "https://github.com/KOBUGE-Games/minilens/archive/v1.2.zip",
+    "isAssetLibraryImport": true,
+    "assetLibraryTag": "Projects",
+    "godotVersion": "2.1",
+    "assetVersion": "",
+    "lastUpdated": "2017-09-13",
+    "username": "bojidar_bg",
+    "userUrl": "https://godotengine.org//asset-library/asset?user=bojidar_bg",
+    "icon": "https://raw.githubusercontent.com/KOBUGE-Games/minilens/master/icon.png",
+    "version": "v1.2",
+    "originalUrl": "https://godotengine.org/asset-library/asset/1"
+  },
+  "name": "Minilens",
+  "description": "1000 years after post-apocalyptic Earth, many form of lifes went extinct, including humans. An alien robot series, called Minilens, are cleaning up earth and collecting surviving flora. The game is won by destroying all Radioactive Barrels and collecting surviving flora. The drawback is that Minilens can't jump.",
+  "source": "https://github.com/KOBUGE-Games/minilens",
+  "download": "https://github.com/KOBUGE-Games/minilens/archive/v1.2.zip",
+  "isAssetLibraryImport": true,
+  "godotVersion": "2.1",
+  "assetVersion": "",
+  "lastUpdated": "2017-09-13",
+  "username": "imported-from-godot-asset-library",
+  "foreignUsername": "bojidar_bg",
+  "foreignUserUrl": "https://godotengine.org//asset-library/asset?user=bojidar_bg",
+  "icon": "https://raw.githubusercontent.com/KOBUGE-Games/minilens/master/icon.png",
+  "version": "v1.2",
+  "originalUrl": "https://godotengine.org/asset-library/asset/1",
+  "tags": [
+    "starting-points",
+    "projects"
+  ]
+}
