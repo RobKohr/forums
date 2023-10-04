@@ -5,6 +5,37 @@
   },
   "openapi": "3.0.3",
   "paths": {
+    "/api/assets/{id}": {
+      "get": {
+        "operationId": "AssetsApiSpec_get_/api/assets/{id}",
+        "tags": [
+          "Assets"
+        ],
+        "summary": "Get asset by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/register": {
       "post": {
         "operationId": "RegisterApiSpec_post_/api/auth/register",
@@ -168,6 +199,20 @@
   },
   "components": {
     "schemas": {
+      "Asset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "data": {}
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "id"
+        ]
+      },
       "ParamsDictionary": {
         "type": "object",
         "additionalProperties": {

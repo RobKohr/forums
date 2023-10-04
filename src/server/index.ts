@@ -36,7 +36,10 @@ app.use(bodyParser.json());
 
 const port = process.env["API_PORT"] || 9999;
 
+import { router as assetRouter } from "./apiRoutes/assets.api";
 import { router as authRouter } from "./apiRoutes/auth.api";
+
+
 const initServer = async () => {
   const app = express();
   /* output every api request's path and method to the console, if that file isn't a static file*/
@@ -48,6 +51,7 @@ const initServer = async () => {
   });
 
   app.use("/api/auth", authRouter);
+  app.use("/api/assets", assetRouter);
   app.listen(port);
 
   global.log(`Startup complete: http://localhost:${port}/api/docs`);
