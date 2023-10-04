@@ -3,7 +3,7 @@ import "./SearchResult.scss";
 export default function SearchResult() {
   return (
     <div class="search-result-component">
-      <A href="/test/example">
+      <A href="/assets/uncategorized/gh:Geequlim:godot-themes">
         <div class="members-only-lock emoji">🔒</div>
         <div class="result-icon-container">
           <img class="result-icon" src="/test/exampleIcon.png" />

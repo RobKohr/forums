@@ -10,6 +10,7 @@ import { MenuModal } from "./components/MenuModal/MenuModal";
 import Notifications from "./components/Notifications/Notifications";
 import { setAuthUserTokenFromCookie } from "./components/authUserToken";
 
+import Asset from "./pages/_sites/asset-store/asset";
 import Browse from "./pages/_sites/asset-store/browse";
 import SignIn from "./pages/auth/login";
 import Logout from "./pages/auth/logout";
@@ -37,6 +38,16 @@ siteRoutes["common"] = [
 
 siteRoutes["asset-store"] = [
   { path: "/", component: Browse },
+  { path: "/assets/browse", component: Browse },
+  { path: "/assets/:tag0/browse", component: Browse },
+  { path: "/assets/:tag0/:tag1/browse", component: Browse },
+  { path: "/assets/:tag0/:tag1/:tag2/browse", component: Browse },
+  { path: "/assets/:tag0/:tag1/:tag2/:tag3/browse", component: Browse },
+  { path: "/assets/:id", component: Asset },
+  { path: "/assets/:tag0/:id", component: Asset },
+  { path: "/assets/:tag0/:tag1/:id", component: Asset },
+  { path: "/assets/:tag0/:tag1/:tag2/:id", component: Asset },
+  { path: "/assets/:tag0/:tag1/:tag2/:tag3/:id", component: Asset },
   { path: "/test", component: Test },
 ];
 
