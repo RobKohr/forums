@@ -12,6 +12,7 @@ import { setAuthUserTokenFromCookie } from "./components/authUserToken";
 
 import Asset from "./pages/_sites/asset-store/asset";
 import Browse from "./pages/_sites/asset-store/browse";
+import Article from "./pages/_sites/forum/article";
 import SignIn from "./pages/auth/login";
 import Logout from "./pages/auth/logout";
 import Register from "./pages/auth/register";
@@ -35,6 +36,7 @@ siteRoutes["common"] = [
   { path: "/auth/register", component: Register },
   { path: "/auth/logout", component: Logout },
 ];
+siteRoutes["forum"] = [{ path: "/article/:id", component: Article }];
 
 siteRoutes["asset-store"] = [
   { path: "/", component: Browse },

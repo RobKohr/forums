@@ -50,13 +50,12 @@ export async function postData(apiPath: string, data: any) {
   return await response.json();
 }
 
-export async function getData(apiPath: string, data: any) {
+export async function getData(apiPath: string) {
   const response = await fetch(apiBaseUrl + apiPath, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   });
   return await response.json();
 }
